@@ -1,6 +1,6 @@
 ---
 name: wolai-archive-app
-description: Archives an app into Wolai after deep exploration; summarizes install, basic usage, per-page advanced usage, and per-page FAQ; sets page icon via update_page using only built-in emoji or font_awesome (no link icons). Topics: comma-separated bi_link. Triggers: 归档应用、Wolai 归档、页面图标、我来内置图标.
+description: "Archives an app into Wolai after deep exploration; summarizes install, basic usage, per-page advanced usage, and per-page FAQ; sets page icon via update_page using only built-in emoji or font_awesome (no link icons). Topics: comma-separated bi_link. Triggers: 归档应用、Wolai 归档、页面图标、我来内置图标."
 ---
 
 # wolai-archive-app
