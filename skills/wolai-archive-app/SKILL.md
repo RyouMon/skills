@@ -1,6 +1,6 @@
 ---
 name: wolai-archive-app
-description: "Archives an app into Wolai after deep exploration; summarizes install, basic usage, per-page advanced usage, and per-page FAQ; sets page icon via update_page using only built-in emoji or font_awesome (no link icons). Topics: comma-separated bi_link. Triggers: 归档应用、Wolai 归档、页面图标、我来内置图标."
+description: "Archives an app into Wolai after deep exploration; summarizes install, basic usage, per-page advanced usage, and per-page FAQ; sets page icon via update_page using only built-in emoji or font_awesome (no link icons). URLs only as rich-text inline link, never bookmark blocks. Topics: comma-separated bi_link. Triggers: 归档应用、Wolai 归档、页面图标、我来内置图标."
 ---
 
 # wolai-archive-app
@@ -40,11 +40,16 @@ description: "Archives an app into Wolai after deep exploration; summarizes inst
 2. **手段**：浏览器/文档 MCP、仓库内 `README`/`docs/`、官方搜索；能点进子页就点，记录**页面/文档标题与 URL**。
 3. **产出（内化，不必贴进 Wolai）**：页面清单、安装入口、基础操作路径、各页高阶功能点、各页易错点。
 
+## 外链（仅普通链接）
+
+- **允许**：`text` / `heading` / 列表等块的富文本 `content` 里，行内 `{ title: string, link: string }`（及同段混排的字面量、`bi_link` 等）。
+- **禁止**：`create_block` 的 **`type: "bookmark"`**（我来「网址书签」卡片块）。外链不得用书签块呈现。
+
 ## 四节正文规则（写入 Wolai 须满足）
 
 | 节 | 要求 |
 |----|------|
-| **安装** | **官方**安装文档链接 + **官方**下载/包管理器入口（`bookmark` / 富文本 `link`）；步骤用短列表或引用官方小节标题；非官方教程仅作补充并标注来源。 |
+| **安装** | **官方**安装文档链接 + **官方**下载/包管理器入口：仅富文本行内 `link`，**禁止 `bookmark`**；步骤用短列表或引用官方小节标题；非官方教程仅作补充并标注来源。 |
 | **用法**（= 基础用法） | 一条「最小可跑通」路径：从打开应用到完成最常见任务；命令/按钮名与官方一致；避免一上来堆高级项。 |
 | **进阶** | **按页面（或按文档大章节）分类**：每类用 `heading` L2 或小标题 + 正文；写该页/该模块的高阶能力、配置、工作流，不重复「用法」已写的入门步。 |
 | **FAQ** | **按页面（或按模块）分类**：同上结构；每条问题短问 + 短答 + 必要时链官方 issue/文档；优先真实踩坑与文档已写常见问题。 |
@@ -53,7 +58,7 @@ description: "Archives an app into Wolai after deep exploration; summarizes inst
 
 ## 骨架 → blocks
 
-`quote` → `text`×5「主题/主页/文档/指南/源码」→ `divider` → `heading` L1「安装」「用法」「进阶」「FAQ」→ 各节按上表填**实质内容**（非「待补」除非确实缺官方源并注明）。URL → `bookmark` / 富文本 `link`（见 `create_block` schema）。
+`quote` → `text`×5「主题/主页/文档/指南/源码」→ `divider` → `heading` L1「安装」「用法」「进阶」「FAQ」→ 各节按上表填**实质内容**（非「待补」除非确实缺官方源并注明）。外链 → 仅富文本 `link`；**勿** `bookmark`（见上节「外链」）。
 
 ### 主题（可多关联、逗号分隔）
 
@@ -68,4 +73,4 @@ outline → section content → `rewrite_section`；标题下补 → `insert_und
 
 ## 校验 / 忌
 
-`get_page_outline` 验结构；`get_page` 可看 icon 是否生效。忌：盲调 MCP；**未做多源探索就写四节**；全文 README 无结构粘贴；大页 `include_blocks:true`；**页 icon 用 `link` 外链图**。
+`get_page_outline` 验结构；`get_page` 可看 icon 是否生效。忌：盲调 MCP；**未做多源探索就写四节**；全文 README 无结构粘贴；大页 `include_blocks:true`；**页 icon 用 `link` 外链图**；**用 `bookmark` 块挂外链（须改富文本 `link`）**。
