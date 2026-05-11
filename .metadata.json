@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "entries": {
+    "_JuliusBrussee-caveman": {
+      "source": "https://github.com/JuliusBrussee/caveman.git",
+      "tracked": true,
+      "branch": "main"
+    },
+    "_anthropics-skills": {
+      "source": "https://github.com/anthropics/skills.git",
+      "tracked": true,
+      "branch": "main"
+    },
+    "_conorluddy-ios-simulator-skill": {
+      "source": "https://github.com/conorluddy/ios-simulator-skill.git",
+      "tracked": true,
+      "branch": "main"
+    },
+    "_forrestchang-andrej-karpathy-skills": {
+      "source": "https://github.com/forrestchang/andrej-karpathy-skills.git",
+      "tracked": true,
+      "branch": "main"
+    },
+    "_garrytan-gstack": {
+      "source": "https://github.com/garrytan/gstack.git",
+      "tracked": true,
+      "branch": "main"
+    },
+    "_obra-superpowers": {
+      "source": "https://github.com/obra/superpowers.git",
+      "tracked": true,
+      "branch": "main"
+    },
+    "_sickn33-antigravity-awesome-skills": {
+      "source": "https://github.com/sickn33/antigravity-awesome-skills.git",
+      "tracked": true,
+      "branch": "main"
+    },
+    "_vercel-labs-agent-skills": {
+      "source": "https://github.com/vercel-labs/agent-skills.git",
+      "tracked": true,
+      "branch": "main"
+    }
+  }
+}
