@@ -117,46 +117,45 @@ skillshare sync
 
 ---
 
-## 3. 安装技能：开源一律建议 `--track`
+## 3. 安装技能
 
-**`--track`（简写 `-t`）**：克隆时**保留 `.git`**，把整段仓库作为「可跟踪的技能源」放进源目录；之后可用 `skillshare check` / `skillshare update` 拉上游更新。被跟踪的仓库在源目录里会以 **`_` 前缀**命名（嵌套层级用 `__` 分隔），例如 `_team__frontend__ui`。
-
-对**来自开源仓库、希望随上游更新**的技能集合，推荐始终：
+与官方 [install 文档](https://skillshare.runkids.cc/docs/reference/commands/install) 一致的常见用法示例：
 
 ```bash
-skillshare install github.com/组织或用户/仓库名 --track
-```
+# GitHub 简写：装到具体技能路径
+skillshare install anthropics/skills/skills/pdf
 
-可与分支、子目录、项目模式组合，例如：
-
-```bash
-skillshare install github.com/team/skills --track --branch develop --all
-skillshare install github.com/team/skills --track -p
-```
-
-**单技能路径安装**（不整仓 track，适合只装某一个目录下的技能）：
-
-```bash
-skillshare install owner/repo/skills/pdf
-```
-
-**浏览仓库内多个技能再选**（不提供到具体 skill 的路径时进入 discovery）：
-
-```bash
+# 只给仓库，进入发现模式（交互挑选）
 skillshare install anthropics/skills
-```
 
-**无参数 `install`（从 `config.yaml` 清单安装）**  
-会安装配置里列出的远程技能；其中 `tracked: true` 与命令行 `--track` 等价。适合团队复现同一套技能：
+# 本地路径
+skillshare install ~/Downloads/my-skill
 
-```bash
+# 无参数：按 config.yaml 中的 skills 清单安装
 skillshare install
 skillshare install -p
 ```
 
+多技能仓库可非交互指定名称或 glob、或一次装全：
+
+```bash
+skillshare install anthropics/skills -s pdf,commit
+skillshare install anthropics/skills --all
+```
+
+**`--track`（简写 `-t`）**：整仓克隆并保留 `.git`，便于之后用 `skillshare check` / `skillshare update` 拉上游；适合团队共享的固定仓库。可与分支、子目录、项目模式组合，例如：
+
+```bash
+skillshare install github.com/team/skills --track
+skillshare install github.com/team/skills --track --branch develop --all
+skillshare install github.com/team/skills --track -p
+```
+
+配置里 `tracked: true` 与命令行 `--track` 等价。
+
 安装只改**源目录**；要让各 CLI 生效需再执行 **`skillshare sync`**。
 
-其他常用标志：`--skill` / `-s`（多技能仓库里指定名称或 glob），`--all` / `-y`，`--into`（安装到源下子目录），`--force`，`--update` / `-u`，`--branch` / `-b`，`--dry-run` / `-n`，`--project` / `-p`。完整说明见 [install 命令文档](https://skillshare.runkids.cc/docs/reference/commands/install)。
+其他常用标志：`--skill` / `-s`，`--all` / `-y`，`--into`，`--force`，`--update` / `-u`，`--branch` / `-b`，`--dry-run` / `-n`，`--project` / `-p`。完整说明见上文 install 文档链接。
 
 ---
 
@@ -277,7 +276,7 @@ skillshare push -m "Describe your skill change"
 | 步骤 | 命令 |
 |------|------|
 | 新机 / 新仓库 | `skillshare init` 或 `skillshare init -p` |
-| 装开源技能集（建议跟踪） | `skillshare install github.com/org/repo --track` |
+| 从仓库安装技能 | `skillshare install owner/repo` 或 `owner/repo/路径/到/技能` |
 | 装完推到各 CLI | `skillshare sync` |
 | 看是否有更新 | `skillshare check` |
 | 拉上游 | `skillshare update <名或仓库>或 skillshare update --all` |
