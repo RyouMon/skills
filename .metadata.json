@@ -35,6 +35,31 @@
       "source": "https://github.com/vercel-labs/agent-skills.git",
       "tracked": true,
       "branch": "main"
+    },
+    "mobile-design": {
+      "source": "github.com/sickn33/antigravity-awesome-skills/skills/mobile-design",
+      "type": "github-subdir",
+      "installed_at": "2026-05-11T16:35:54.5618783+08:00",
+      "repo_url": "https://github.com/sickn33/antigravity-awesome-skills.git",
+      "subdir": "skills/mobile-design",
+      "version": "d3c871d",
+      "tree_hash": "f2ac719f34b93188f3ae2c523d191fb413aaf513",
+      "file_hashes": {
+        "SKILL.md": "sha256:de8b3162d7082c45a585e724090918a320022a270c05b07b2458491e08f762f4",
+        "decision-trees.md": "sha256:cd0fe98f0214aa827e94a0d4e5dbe67eda5986702f4bd72ad1ed89496fbd21a1",
+        "mobile-backend.md": "sha256:179392c834cac241ac8e9586b7eea63908fc20e44a43da079ba837226287d42f",
+        "mobile-color-system.md": "sha256:25bf1d708f82a1eacc95868e40cb324a96074f3a57e76850f9295a3b5f8c56ac",
+        "mobile-debugging.md": "sha256:98dac444735567a5447eeb9154794ff731fff3311cceec0e0c1544fcca5c223e",
+        "mobile-design-thinking.md": "sha256:8c01cd00b6b84d11e30c26b4d409d564a9abc52002b333e36d73719cc7b71ad1",
+        "mobile-navigation.md": "sha256:fbd861f91cff52b6546b442ffaeadf899fd23abe26a5658e3f30254e51265c87",
+        "mobile-performance.md": "sha256:0fd6e179723877ee3a72241f057010adb7a8db4fafc3846e1dafca3f74710988",
+        "mobile-testing.md": "sha256:5ac063e8ea2e2e063eccbcefc875ebc80a8acef3dee6162dfffd74deee64c331",
+        "mobile-typography.md": "sha256:585c585ea3142a7f9131e7675c8ea444c800e8b670dddf0e20c0e6ebde51747d",
+        "platform-android.md": "sha256:f2703be7a3f9e76936fc72b35b3b32ba3bceb1e5424ebd0102fce4a81f333191",
+        "platform-ios.md": "sha256:bfde77049e789d10120c3db5814178e0b35e13bb1c48719b659a4066f0f66a2f",
+        "scripts/mobile_audit.py": "sha256:ae721e529d3a665d8311ee357c2f1d7d22c541b80e0d9b8e32aec95c2154c53c",
+        "touch-psychology.md": "sha256:042826ecc3db2fb98a7c279af3aeeadf5e293ff3c6db59bcd0d4bffacef77679"
+      }
     }
   }
 }
