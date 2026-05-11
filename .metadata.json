@@ -60,6 +60,30 @@
         "scripts/mobile_audit.py": "sha256:ae721e529d3a665d8311ee357c2f1d7d22c541b80e0d9b8e32aec95c2154c53c",
         "touch-psychology.md": "sha256:042826ecc3db2fb98a7c279af3aeeadf5e293ff3c6db59bcd0d4bffacef77679"
       }
+    },
+    "shadcn": {
+      "source": "github.com/shadcn/ui/skills/shadcn",
+      "type": "github-subdir",
+      "installed_at": "2026-05-11T16:44:11.2469886+08:00",
+      "repo_url": "https://github.com/shadcn/ui.git",
+      "subdir": "skills/shadcn",
+      "version": "8ca30ed",
+      "tree_hash": "a8404703769866faf15bee897c9ae6e252ac2d35",
+      "file_hashes": {
+        "SKILL.md": "sha256:4f3ab41955c9286633bb216a2ac346cadab28a15893427939360da67bf9eaa78",
+        "agents/openai.yml": "sha256:92be2f46bf42718ad62fd987d1c0dff5baacc37895bf8ab5e7ba858442b5f997",
+        "assets/shadcn-small.png": "sha256:0ecc62d682727f68fc4937eed19960c706714fa084d44f63028d611ae02bf3d7",
+        "assets/shadcn.png": "sha256:7d60ad6fec4d89a0d44ba5a3c9283d2fea0047af5467f9227040e20d927d39b7",
+        "cli.md": "sha256:729d3c12c7a9bde0d0047af3b49550f3f607565f5785b77d3f0419c58ec68da5",
+        "customization.md": "sha256:8b34cdc4c3ac3dd37031a5fa09092c3678c6eecc7283c2f5dad2eae29ef13d41",
+        "evals/evals.json": "sha256:0d0f2727540fe1b8846c52ed47d8f51ff0b1066596d6a6d750214b812be5e22b",
+        "mcp.md": "sha256:3b62cbb56fb2b8ccf5d06d798cabf931f177b508eddb40abac9285fbc8d7c34f",
+        "rules/base-vs-radix.md": "sha256:d0b66cd55a921602e7ca1f3b8c03a2f744b8d688f843155bbb2d9c7cef08eb0a",
+        "rules/composition.md": "sha256:b8cd03b5343a7a42ff015252b689d573ecd492ff96738888f93c688f4f5bbc6c",
+        "rules/forms.md": "sha256:a5422ccca0bcaa9ccb5e8a3745bacd08eadcf9a96f54e1b39f5ffe725f316feb",
+        "rules/icons.md": "sha256:08a07baacbbef0926002b88ca1fc410bf70eb7938a3f3521e4d8f643f6621908",
+        "rules/styling.md": "sha256:6e9c6ee8c29cb5930b16d295a45e2109ab8913f2300237448f04fd25deaf15b0"
+      }
     }
   }
 }
