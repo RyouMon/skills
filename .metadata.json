@@ -31,11 +31,6 @@
       "tracked": true,
       "branch": "main"
     },
-    "_sickn33-antigravity-awesome-skills": {
-      "source": "https://github.com/sickn33/antigravity-awesome-skills.git",
-      "tracked": true,
-      "branch": "main"
-    },
     "_vercel-labs-agent-skills": {
       "source": "https://github.com/vercel-labs/agent-skills.git",
       "tracked": true,
