@@ -61,13 +61,9 @@ skillshare completion powershell --install
 
 首次在本机建立「源目录 + 目标（各 AI CLI 的技能目录）+ `config.yaml`」，并可选初始化 git、绑定远端。
 
-**交互式（推荐首次）**
-
-```bash
-skillshare init
-```
-
 **绑定已有技能 Git 仓库（远端）**
+
+推荐先建立仓库，然后使用远端仓库初始化：
 
 ```bash
 skillshare init --remote https://github.com/RyouMon/skills.git
@@ -81,7 +77,7 @@ skillshare init --remote https://github.com/RyouMon/skills.git
   Default: C:\Users\Wen\AppData\Roaming\skillshare\skills
   Customize source path? [y/N]: Y
   Enter source path: C:\Users\Wen\Projects\skills
-✓ Source path: C:\Users\Wen\Projects\skills (Windows) ~\Projects\skills (Linux/MacOS)
+✓ Source path: C:\Users\Wen\Projects\skills (Windows) ~\Projects\skills (Linux/MacOS)  # 推荐选择一个自己常用的项目目录
 
 Initialize from existing skills?
 ─────────────────────────────────────────
@@ -98,7 +94,7 @@ Initialize from existing skills?
 
   Enter choice [1]: 8
 → Starting with empty source
-✓ Added 3 target(s): claude, cursor, universal
+✓ Added 3 target(s): claude, cursor, universal  # 只选择自己用的，避免同步时耗时过长。
 
 Sync mode preference
 ─────────────────────────────────────────
