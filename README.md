@@ -75,6 +75,50 @@ skillshare init --remote https://github.com/RyouMon/skills.git
 
 若仓库根目录不全是技能（还有 README、CI 等），可用 **`--subdir`** 把源指到子目录（例如 `skills/`）。非交互示例见官方 [init 文档](https://skillshare.runkids.cc/docs/reference/commands/init)。
 
+**推荐初始化流程**
+```
+→ Source directory stores your skills (single source of truth)
+  Default: C:\Users\Wen\AppData\Roaming\skillshare\skills
+  Customize source path? [y/N]: Y
+  Enter source path: C:\Users\Wen\Projects\skills
+✓ Source path: C:\Users\Wen\Projects\skills (Windows) ~\Projects\skills (Linux/MacOS)
+
+Initialize from existing skills?
+─────────────────────────────────────────
+  Copy skills from an existing directory to the shared source?
+
+  [1] Copy from witsy (56 skills)
+  [2] Copy from universal (56 skills)
+  [3] Copy from dexto (56 skills)
+  [4] Copy from warp (56 skills)
+  [5] Copy from cline (56 skills)
+  [6] Copy from codex (1 skills)
+  [7] Copy from claude (38 skills)
+  [8] Start fresh (empty source)
+
+  Enter choice [1]: 8
+→ Starting with empty source
+✓ Added 3 target(s): claude, cursor, universal
+
+Sync mode preference
+─────────────────────────────────────────
+  1) merge    — per-skill symlinks, preserves local skills
+  2) copy     — real files, recommended if unsure whether your AI CLI supports symlinks
+  3) symlink  — entire directory linked
+
+  Enter choice [1]: 1
+✓ Sync mode: merge
+
+→ If a tool doesn't support symlinks, switch to copy mode:
+  skillshare config --mode copy && skillshare sync
+→ Git already initialized in source directory
+→ Git remote already configured: https://github.com/RyouMon/skills.git
+
+→ Specifying a subdirectory as the source will store skills in the subdirectory (e.g. skills/) instead of in the root
+  Specify a subdirectory as the source (e.g. skills)? [y/N]: Y
+  Enter subdirectory name: skills/
+```
+
 **项目模式（技能跟代码仓走，提交 `.skillshare/`）**
 
 ```bash
