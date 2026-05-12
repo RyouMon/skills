@@ -41,22 +41,10 @@ irm https://raw.githubusercontent.com/runkids/skillshare/main/install.ps1 | iex
 brew install skillshare
 ```
 
-**Go（需已安装 Go）**
-
-```bash
-go install github.com/runkids/skillshare/cmd/skillshare@latest
-```
-
 **升级 CLI 本身**
 
 ```bash
 skillshare upgrade
-```
-
-验证：
-
-```bash
-skillshare version
 ```
 
 **可选：Shell 补全**
@@ -79,16 +67,10 @@ skillshare completion powershell --install
 skillshare init
 ```
 
-**仅预览**
-
-```bash
-skillshare init --dry-run
-```
-
 **绑定已有技能 Git 仓库（远端）**
 
 ```bash
-skillshare init --remote git@github.com:你的账号/your-skills.git
+skillshare init --remote https://github.com/RyouMon/skills.git
 ```
 
 若仓库根目录不全是技能（还有 README、CI 等），可用 **`--subdir`** 把源指到子目录（例如 `skills/`）。非交互示例见官方 [init 文档](https://skillshare.runkids.cc/docs/reference/commands/init)。
