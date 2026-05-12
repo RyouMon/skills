@@ -10,13 +10,6 @@
 - **安装与更新**：从 GitHub/GitLab 等安装；带 `--track` 的仓库可用 `check` / `update` 拉取上游。
 - **跨机器**：源目录用 git 管理时，可用 `push` / `pull` 与远端同步后再 `sync`。
 
-路径约定（官方）：
-
-| 平台 | 全局技能源 | 项目技能源 |
-|------|------------|------------|
-| Windows | `%AppData%\skillshare\skills\` | 当前仓库 `.skillshare\skills\` |
-| macOS / Linux | `~/.config/skillshare/skills/` | 当前仓库 `.skillshare/skills/` |
-
 ---
 
 ## 1. 安装命令行
