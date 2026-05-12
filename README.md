@@ -284,6 +284,30 @@ skillshare push -m "Describe your skill change"
 
 也可用 Web UI：`skillshare ui`（项目模式加 `-p`）。
 
+### 组织级技能与团队共享
+
+全公司/全团队用**同一套被跟踪（tracked）的技能仓库**，成员一条命令安装、定期 `update` + `sync`，避免在 Slack 里「拷一份技能」或版本不一致。完整说明见官方 [Organization-Wide Skills](https://skillshare.runkids.cc/docs/how-to/sharing/organization-sharing)。
+
+**负责人：建库**
+
+建独立 Git 仓，存放公司自研 Skills。
+
+**成员：初次与日常**
+
+跟踪团队 Skills 仓库。
+
+```bash
+skillshare install github.com/org/skills --track
+skillshare sync
+```
+
+更新团队 Skills 仓库。
+
+```bash
+skillshare update --all
+skillshare sync
+```
+
 ---
 
 ## 8. 日常推荐流程（速查）
@@ -307,5 +331,6 @@ skillshare push -m "Describe your skill change"
 
 - 仓库与发行版：<https://github.com/runkids/skillshare>
 - 文档首页：<https://skillshare.runkids.cc/docs/>
+- 组织级技能（团队共享）：<https://skillshare.runkids.cc/docs/how-to/sharing/organization-sharing>
 - 命令总览：<https://skillshare.runkids.cc/docs/reference/commands>
 - GitHub Action：`runkids/setup-skillshare@v1`（CI 里安装并 `sync`）
