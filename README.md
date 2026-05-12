@@ -112,7 +112,7 @@ Sync mode preference
 
 → Specifying a subdirectory as the source will store skills in the subdirectory (e.g. skills/) instead of in the root
   Specify a subdirectory as the source (e.g. skills)? [y/N]: Y
-  Enter subdirectory name: skills/
+  Enter subdirectory name: skills/  # 为了与 skills.sh 兼容
 ```
 
 **项目模式（技能跟代码仓走，提交 `.skillshare/`）**
