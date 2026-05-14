@@ -4,38 +4,6 @@
 
 下列流程与官方文档中的 [Commands](https://skillshare.runkids.cc/docs/reference/commands)、[init](https://skillshare.runkids.cc/docs/reference/commands/init)、[install](https://skillshare.runkids.cc/docs/reference/commands/install) 及 [Cross-Machine Sync](https://skillshare.runkids.cc/docs/how-to/sharing/cross-machine-sync) 等章节一致，便于从「装机」到「日常」一眼看完。
 
-```mermaid
-flowchart TD
-    subgraph setup["首次：环境与初始化"]
-        A["安装 CLI<br/>curl / brew / PowerShell 脚本"] --> A2["可选：completion / upgrade"]
-        A2 --> B["init：源目录 + targets + config.yaml<br/>常用：--remote、-p、--subdir、--mode"]
-        B --> B2["新装某 AI CLI：init --discover"]
-    end
-
-    subgraph acquire["获取或编写技能（写入源目录）"]
-        C1["install：仓库 / 子路径 / 本地路径<br/>可选 --track、--branch、-p"]
-        C2["new：脚手架 + 编辑 SKILL.md"]
-    end
-
-    S["sync → 各 AI CLI<br/>含 sync agents、sync --all 等"]
-
-    B2 --> C1
-    B2 --> C2
-    B2 -.->|"空源可先"| S
-    C1 --> S
-    C2 --> S
-
-    S --> M{日常维护}
-    M --> E1["check（只读）"]
-    E1 --> E2["update（含 --all / --prune）"]
-    E2 --> S
-    M --> E3["pull / push（源为 git）"]
-    E3 --> S
-    M --> E4["collect 收回目标侧改动"]
-    E4 --> S
-    M --> E5["doctor / audit / ui"]
-```
-
 ---
 
 ## 为何用 skillshare
