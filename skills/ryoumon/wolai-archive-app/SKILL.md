@@ -7,7 +7,7 @@ description: "Archives an app into Wolai after deep exploration; summarizes inst
 
 ## 常量
 
-- **parent_id**（新页父节点）: `tnd54YWouEWd1Se5Q33mgN`
+- **parent_id**（新页父节点 = 工作空间根）：`list_docs()` 取任一顶级文档 `id` → `get_doc(doc_id)` 读 `document.parent_id`（`parent_type === "workspace"`）。用户指定父节点时用其 ID。
 - **风格**: ultra caveman — SKILL 正文已压缩；写入 Wolai 的正文可正常中文，避免废话段。
 
 ## 前置
@@ -17,7 +17,7 @@ description: "Archives an app into Wolai after deep exploration; summarizes inst
 
 ## 流程
  
-**探索 + 写稿 → 再 MCP。** `create_page` → **`update_page` 设 icon** → `create_block` / `rewrite_section`。`parent_id` 常量；`title` = 应用名。
+**探索 + 写稿 → 再 MCP。** `create_page` → **`update_page` 设 icon** → `create_block` / `rewrite_section`。`parent_id` 见常量；`title` = 应用名。
 
 ### 页面 icon（仅我来内置）
 

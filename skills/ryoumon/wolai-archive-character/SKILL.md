@@ -7,7 +7,7 @@ description: "Collects anime/game character or actor profiles into Wolai after r
 
 ## 常量
 
-- **无固定 parent_id**（与 wolai-archive-app 不同）：不预置父页面、不另建「角色库」汇总页。
+- **parent_id**（新页父节点 = 工作空间根）：`list_docs()` 取任一顶级文档 `id` → `get_doc(doc_id)` 读 `document.parent_id`（`parent_type === "workspace"`）。用户指定父节点时用其 ID。
 - **风格**：SKILL 正文压缩；写入 Wolai 的正文可正常中文，避免废话段。
 
 ## 前置
@@ -24,7 +24,7 @@ description: "Collects anime/game character or actor profiles into Wolai after r
 `create_page` 仍须 `parent_id`，但本 skill **不设常量**：
 
 1. 用户已指定父节点 → 直接用其 `page_id` / 空间 ID。
-2. 未指定 → `list_pages` 取工作空间根，或问用户放哪。
+2. 未指定 → `list_docs()` 取任一顶级文档 `id` → `get_doc(doc_id)` 读 `document.parent_id`（`parent_type === "workspace"`）。
 3. 建页前 `search_pages(query=中文名)`：已有同名页则更新，勿重复建。
 
 `title` = **角色中文名**（演员同理，用常用中文译名或官方中文名）。

@@ -7,7 +7,7 @@ description: "Archives books into Wolai with metadata, cover, TOC-based subpages
 
 ## 常量
 
-- **parent_id**（新页父节点 = 「我的页面」工作空间根）: `r9EDpC4t3jaNmmEA64N5pu`
+- **parent_id**（新页父节点 = 「我的页面」工作空间根）：`list_docs()` 取任一顶级文档 `id` → `get_doc(doc_id)` 读 `document.parent_id`（`parent_type === "workspace"`）。用户指定父节点时用其 ID。
 - **风格**：SKILL 正文压缩；写入 Wolai 的正文可正常中文，避免废话段。
 
 ## 前置
@@ -31,11 +31,12 @@ description: "Archives books into Wolai with metadata, cover, TOC-based subpages
 **调研 + 写稿 → 再 MCP。**
 
 1. 收集字段与目录（见下）。
-2. `create_doc(parent_id=常量, title=书名)`。
+2. `create_doc(parent_id=见常量, title=书名)`。
 3. **`update_doc(doc_id, icon={ type, icon })`** 设页 icon（📕📗📘 等；非 link）。
 4. `create_block` 写主页面板 + 按篇/章建 **`type: "page"`** 子页面块。
-5. 封面：优先上传/嵌入；必要时 `image.link`（见「封面」）。
-6. `get_page_outline` 校验结构。
+5. **章子页内小节标题**（见「章子页内小节」）：各章 `page` 建完后，逐章 `create_block` 写入去编号的 L1 `heading`。
+6. 封面：优先上传/嵌入；必要时 `image.link`（见「封面」）。
+7. `get_page_outline` 验主页面 + 抽样章子页结构。
 
 ## 归档前：信息收集（必做）
 
@@ -51,7 +52,7 @@ description: "Archives books into Wolai with metadata, cover, TOC-based subpages
 | CIP | 图书在版编目一行；格式见示例：`CIP：国富论／（英）亚当·斯密（Smith, A. ）著；孙善春，李春长译．—北京：中国华侨出版社，2011．3` |
 | ISBN | `ISBN：978-7-5113-1217-4`；无则留 `ISBN：` 并注明未查到 |
 | 封面 | 与用户手头版本一致；见「封面」 |
-| 目录 | **篇（可选）→ 章** 两级；章对应子页面 |
+| 目录 | **篇（可选）→ 章 → 节**；章对应子页面，节写入章子页内 |
 
 ### 本地文件（skill 优先）
 
@@ -82,11 +83,11 @@ description: "Archives books into Wolai with metadata, cover, TOC-based subpages
 
 ### 目录与「篇」
 
-1. 解析 TOC 为 `{ parts?: [{ title, chapters: [{ title }] }], chapters?: [...] }`。
+1. 解析 TOC 为 `{ parts?: [{ title, chapters: [{ title, sections?: [string] }] }], chapters?: [...] }`；**节**即 `1.1` / `第1节` 等子标题。
 2. 书有「第一篇 / Part I / 卷一」等**大分卷** → 用 `heading` L1（或示例中的 L2，与全书第一篇层级一致即可）+ 篇下 `quote` 总结 + 章级 `page` 子块。
 3. **无分卷** → 跳过篇标题，章直接 `page` 子块挂在主页面下（或单篇 `heading`「正文」+ 章列表，按原书习惯）。
 4. 每**篇**下加 `quote`：**该部分讲什么**（3–5 句，非逐章罗列）。
-5. 章子页：仅 `create_block` 的 **`type: "page"`**，`content` 为章标题；**不在此 skill 内写章内正文**（除非用户另要求）。
+5. 章子页块：`create_block` 的 **`type: "page"`**，`content` 保留**章级**标题（含「第X章」）；**节标题另写入章内**（见下），不写章内笔记正文（除非用户另要求）。
 
 ## 页面模板 → blocks
 
@@ -134,7 +135,29 @@ ISBN：978-7-5113-1217-4
 ```
 
 - 子页 icon 可选 `emoji`（示例用 ✅ 表示已读；新建可省略或 📄）。
-- 子页默认空正文，供用户后续笔记。
+- `type: "page"` 的 **block id** 即章子页 `parent_id`（与 URL 中 page id 相同）。
+
+### 章子页内小节（必做）
+
+建完章 `page` 子块后，对该章 **`create_block(parent_id=<章 page id>, blocks=[...])`**，按目录顺序写入各**节**标题：
+
+```json
+{ "type": "heading", "level": 1, "content": "电影语言的起源" }
+```
+
+**去编号**（章内 heading 不含序号前缀）：
+
+| 原目录 | 写入 content |
+|--------|----------------|
+| `1.1 电影语言的起源` | `电影语言的起源` |
+| `第1节 电影语言的起源` | `电影语言的起源` |
+| `Chapter 6 三个演员的对话`（若在章内） | `三个演员的对话` |
+
+- 去掉 `\d+(\.\d+)+\s*`、`第[一二三四五六七八九十百\d]+节\s*`、`Chapter\s+\d+\s*` 等前缀；**保留**正文标点与引号。
+- **有节**：每节一条 L1 `heading`，顺序与 TOC 一致。
+- **无章内节**（如整章无 `x.y`）：写一条 L1，content 为**去掉「第X章」后的章名**（例：`第十章 运动结束后的剪接` → `运动结束后的剪接`）。
+- **前置页**（出版前言 / 推荐序等）：若建子页，单条 L1 用篇名本身（无编号可去）。
+- 节标题块下**留空**供用户笔记；校验：`get_page_outline(page_id=<章 id>)` 应列出各 L1 section。
 
 ### 篇标题层级
 
@@ -168,9 +191,7 @@ ISBN：978-7-5113-1217-4
 
 ## 父节点
 
-默认 **`parent_id = r9EDpC4t3jaNmmEA64N5pu`**（工作空间根 = 「我的页面」顶级，与「闪念卡片盒」同级）。
-
-用户指定其他父节点时改用其 `page_id`；**不要**默认放进数据库视图（示例国富论在 database 下，本 skill  intentionally 放根目录）。
+默认挂工作空间根（「我的页面」顶级，与「闪念卡片盒」同级）：`list_docs()` 取任一顶级文档 `id` → `get_doc(doc_id)` 读 `document.parent_id`（`parent_type === "workspace"`）。用户指定其他父节点时改用其 `page_id`；**不要**默认放进数据库视图（示例国富论在 database 下，本 skill intentionally 放根目录）。
 
 ## 后续编辑
 
@@ -178,4 +199,4 @@ ISBN：978-7-5113-1217-4
 
 ## 校验 / 忌
 
-`get_page_outline` 验篇/章结构；`get_doc` 看 icon。忌：盲调 MCP；**本地文件未先读相关 skill 就写解析脚本**；**未核版本就建页**；**目录与文件不一致**；漏 CIP/ISBN 不说明；**篇下无总结 quote**；**用 bookmark 挂链**；**页 icon 用 link**；子页章名与 TOC 不符；把书放进非根 parent（除非用户要求）。
+`get_page_outline` 验篇/章 + 抽样章内 L1 节标题；`get_doc` 看 icon。忌：盲调 MCP；**本地文件未先读相关 skill 就写解析脚本**；**未核版本就建页**；**目录与文件不一致**；漏 CIP/ISBN 不说明；**篇下无总结 quote**；**章子页空壳、节标题未写入或仍带编号**；**用 bookmark 挂链**；**页 icon 用 link**；子页章名与 TOC 不符；把书放进非根 parent（除非用户要求）。

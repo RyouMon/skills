@@ -7,7 +7,7 @@ description: "Archives anime/game figures into Wolai after search and user confi
 
 ## 常量
 
-- **无固定 parent_id**：不预置父页面、不另建「手办库」汇总页。
+- **parent_id**（新页父节点 = 工作空间根）：`list_docs()` 取任一顶级文档 `id` → `get_doc(doc_id)` 读 `document.parent_id`（`parent_type === "workspace"`）。用户指定父节点时用其 ID。
 - **风格**：SKILL 正文压缩；写入 Wolai 的正文可正常中文，避免废话段。
 
 ## 前置
@@ -39,7 +39,7 @@ description: "Archives anime/game figures into Wolai after search and user confi
 `create_page` 仍须 `parent_id`，本 skill **不设常量**：
 
 1. 用户已指定父节点 → 直接用其 `page_id` / 空间 ID。
-2. 未指定 → `list_pages` 取工作空间根，或问用户放哪。
+2. 未指定 → `list_docs()` 取任一顶级文档 `id` → `get_doc(doc_id)` 读 `document.parent_id`（`parent_type === "workspace"`）。
 
 `title` = **手办中文版译名**（萌款/Hpoi/MFC 常用中文名；无中文则用社区通译并注明）。
 
