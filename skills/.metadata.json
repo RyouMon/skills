@@ -1,198 +1,258 @@
 {
   "version": 1,
   "entries": {
-    "add-app-clip": {
+    "expo/add-app-clip": {
       "source": "github.com/expo/skills/plugins/expo/skills/add-app-clip",
       "type": "github-subdir",
-      "installed_at": "2026-06-02T18:30:22.276918+08:00",
+      "group": "expo",
+      "installed_at": "2026-06-07T14:34:17.5131761+08:00",
       "repo_url": "https://github.com/expo/skills.git",
       "subdir": "plugins/expo/skills/add-app-clip",
-      "version": "fdd3df1",
+      "version": "145a923",
       "tree_hash": "a5aa0c4e072e768f4c8b1884c644596f88e6fdff",
       "file_hashes": {
-        "SKILL.md": "sha256:ae921363ec897ebdb8acd9e39d5ebf9c51364d9f1e3e2f3454a429d6bee64513",
-        "references/native-module.md": "sha256:d7c9514529016e63bba6c860d3035fcdaa16a47ec16ef94bf16ba0c691bb8f98"
+        "SKILL.md": "sha256:33425f46ae571dc45fe5f376357c86b81530f8ad38a5d17c85ee6c1bf6e351eb",
+        "references/native-module.md": "sha256:0e75ee9052f778abfeb01189ebb188614d0c1df3386d64e28432500bd1e1d43c"
       }
     },
-    "building-native-ui": {
+    "expo/building-native-ui": {
       "source": "github.com/expo/skills/plugins/expo/skills/building-native-ui",
       "type": "github-subdir",
-      "installed_at": "2026-06-02T18:30:22.384192+08:00",
+      "group": "expo",
+      "installed_at": "2026-06-07T14:34:17.7390844+08:00",
       "repo_url": "https://github.com/expo/skills.git",
       "subdir": "plugins/expo/skills/building-native-ui",
-      "version": "fdd3df1",
+      "version": "145a923",
       "tree_hash": "0078663cbdc42e388d2eb9c291dda1a0774eee29",
       "file_hashes": {
-        "SKILL.md": "sha256:dc9c08d2601ea0f3df25656da2c6bff4f28fbc164901fabf7c8b504f5c833c19",
-        "references/animations.md": "sha256:3e855090009f0fde1652694344b2bfb7d9ed9c645789e243933c3e58f28c3670",
-        "references/controls.md": "sha256:e63a7e92cac8a5d0ceb9ed5f05e19ea9cd4d865a8bea6ff8f8a82c74c77fa180",
-        "references/form-sheet.md": "sha256:947de9cf35a15aacf3f02e96e45942b5e4826e536e529570886e5ddbb7ec8591",
-        "references/gradients.md": "sha256:63ced0392f67c41bf90e726613d139a389db609799bfcb91124e6e69b9a66e70",
-        "references/icons.md": "sha256:0436582534ae1cc468805ac5ab9a3cb0fb25faeaededb1d5f415ea246814c596",
-        "references/media.md": "sha256:b05966f4b2ab48b57ea82da172359000295726585f7ffe18a2e5a1be93f2c14f",
-        "references/route-structure.md": "sha256:4c3d70edeb7e36d965c4d96fa150f23ee57e01be5f6c57dd3e34c6309aab7e87",
-        "references/search.md": "sha256:6eefcc0345167031b3661d17090100b101cbedc1053de2e679090405658dfa92",
-        "references/storage.md": "sha256:265e8bc21adcd698062f18fa442e0e07e99e67868576f18aac2112e5381ffbf1",
-        "references/tabs.md": "sha256:2793a7ac0a45cf65564bcf2f6f9282539d201a4b8bea620dc0b53de092454de4",
-        "references/toolbar-and-headers.md": "sha256:14d9a71dd949bd2b28a5bd531f6b9c1b4f3fa847a86db8c5218fee67b5295769",
-        "references/visual-effects.md": "sha256:2c1dfd5438f27e4c15bc09ececc57810a58a13e633dc782caac93f8f52cadadf",
-        "references/webgpu-three.md": "sha256:3a247a7740e4bab4aea5dec8b81c7782a5918bb221838a05f6a94c669f145679",
-        "references/zoom-transitions.md": "sha256:cacc1665e9f3044762765d2cd55fd1ead9627f06478f12dfa2280c6f9ae88ede"
+        "SKILL.md": "sha256:c34adb5ef5c15b587c98e963cd40bd186a3d8d6a39c7ed8b6ba89e08d858f246",
+        "references/animations.md": "sha256:e52361d8926f6f178f82f7fd5cdfc52554e13fd79a2f4719e9a5414cc085c8a7",
+        "references/controls.md": "sha256:f82883ef6f2a9f44475ca7a6e1e2b2703029245c4057a1c78a1cf654d070d8bf",
+        "references/form-sheet.md": "sha256:f9935982a9dc6f0c926602e30b8deef9e271d5d58db2a8031ca18a690affcc90",
+        "references/gradients.md": "sha256:e401012d5255dd762fd936fd1a01f21a59032494a476c1de4bdcf4e9e958803b",
+        "references/icons.md": "sha256:0d0c82586164b78b324d8bb329c6915dc1000177ca44b46a6d4c5ff6d697079c",
+        "references/media.md": "sha256:146f26c198254fee525f04a71aacb398789461db1c87d79bb38aa747226b1401",
+        "references/route-structure.md": "sha256:80992ea08d16c0151dffacd4f31ce1b1cd553e01f4f941bd36d991a978ce274c",
+        "references/search.md": "sha256:317fd181c7ff9783a0a738630042fc662a483f9eccff23aa5eb2ade4195c9e73",
+        "references/storage.md": "sha256:62d6a91f458a7f59eb81ca5279d7d022407749a12e95d70e2046a217230e17c7",
+        "references/tabs.md": "sha256:5ec9f4a60dfcc42039ae369a90c4710255bd8fd91cf751ba6679a76aab38a4d5",
+        "references/toolbar-and-headers.md": "sha256:7bdd70b3f48b9a5b79c24ee1861bf3d078ec39e93f5db7756e695ff92d244760",
+        "references/visual-effects.md": "sha256:920346e657f74906ee30d9b95bb8007cbac56261c06d269593d1bef3da3cadaa",
+        "references/webgpu-three.md": "sha256:4e8b7eae87c9537eab2b28d43c2a718027825ead675a7477ddadaccd74dfebf6",
+        "references/zoom-transitions.md": "sha256:4fddef8ee52e45e64c35f6cc45965d05678b135b26b5eddb116ef1b1fe0527ac"
       }
     },
-    "eas-update-insights": {
+    "expo/eas-update-insights": {
       "source": "github.com/expo/skills/plugins/expo/skills/eas-update-insights",
       "type": "github-subdir",
-      "installed_at": "2026-06-02T18:30:22.420528+08:00",
+      "group": "expo",
+      "installed_at": "2026-06-07T14:34:17.8089842+08:00",
       "repo_url": "https://github.com/expo/skills.git",
       "subdir": "plugins/expo/skills/eas-update-insights",
-      "version": "fdd3df1",
+      "version": "145a923",
       "tree_hash": "f64a9f1f5aa3be8146d6a53bad44902206d5b1e5",
       "file_hashes": {
-        "SKILL.md": "sha256:bb2796387c2781576d1ed75065559eb06bbd836ad2ca61269f862d9d29f8302c",
-        "references/channel-insights-schema.md": "sha256:4e11651a81f616017f04d99e1efbe014cde01db43d40c31a550665516f3442f0",
-        "references/update-insights-schema.md": "sha256:a90bcfcd76717b282f7a690dd5fd6e143a9b529a2acb728f03a8bd59739b3348"
+        "SKILL.md": "sha256:66020fab0d5dbbc441f25106dc5d89cc388839a5c430db012faa16ba2fa4769d",
+        "references/channel-insights-schema.md": "sha256:590ed933434acaed3786e441e75f88c0a6281cad98aac72c96c15937ec7f5df2",
+        "references/update-insights-schema.md": "sha256:8357022966651e636472039257dc0d0dc9815141dfb84e317982aff70e00de68"
       }
     },
-    "expo-api-routes": {
+    "expo/expo-api-routes": {
       "source": "github.com/expo/skills/plugins/expo/skills/expo-api-routes",
       "type": "github-subdir",
-      "installed_at": "2026-06-02T18:30:22.447673+08:00",
+      "group": "expo",
+      "installed_at": "2026-06-07T14:34:17.8800992+08:00",
       "repo_url": "https://github.com/expo/skills.git",
       "subdir": "plugins/expo/skills/expo-api-routes",
-      "version": "fdd3df1",
+      "version": "145a923",
       "tree_hash": "43ff4f9cb35a82e83b97cd48e0cd4dfa7aa912a1",
       "file_hashes": {
-        "SKILL.md": "sha256:db4d2cd6fbce04d9a7914db6e37513c218d5fb678e962c034ebfc122c7406fd3"
+        "SKILL.md": "sha256:6fca0647cb0dc9c1e94d6b82deb1455d0c0f705c1494ea37876392b6d729b257"
       }
     },
-    "expo-brownfield": {
+    "expo/expo-brownfield": {
       "source": "github.com/expo/skills/plugins/expo/skills/expo-brownfield",
       "type": "github-subdir",
-      "installed_at": "2026-06-02T18:30:22.508142+08:00",
+      "group": "expo",
+      "installed_at": "2026-06-07T14:34:18.0128882+08:00",
       "repo_url": "https://github.com/expo/skills.git",
       "subdir": "plugins/expo/skills/expo-brownfield",
-      "version": "fdd3df1",
+      "version": "145a923",
       "tree_hash": "0897e594e41a0155cd0356fda75fb3483b3b370c",
       "file_hashes": {
-        "SKILL.md": "sha256:6c17e12e1ec37e47235d131a9bb098703041ce4908b7191c9bde6fb91aac44c0",
-        "references/brownfield-integrated.md": "sha256:406bd5a9c8f0f4a800a2e09bc1f47c7a52545f32e53a1b38786e160aadc0baca",
-        "references/brownfield-isolated.md": "sha256:85effd65b0c760d201b181b9cd04fcc2f932875487a1b8bfec1f8117ac786773",
-        "references/comparison.md": "sha256:ff8397d6289940d1ae463e8bc1198c966a6fa8ef90f6ba62a8cc39642e8ed3d5",
-        "references/troubleshooting.md": "sha256:e74cd6fbda741cd530df17a65950357fad5c4fecd3b9077e874bc79856f7098a"
+        "SKILL.md": "sha256:7fa4e1dc0db28bf0484e49a836df1fc62ab64084fcc4d79fab4d265c7f4f1244",
+        "references/brownfield-integrated.md": "sha256:73b9e434d2b51d55069e47b308336692bf5a192f15ad78697440199cfb296fd0",
+        "references/brownfield-isolated.md": "sha256:ddec8ec4bfe438827320b668d0f2d4768d0bfe1d12a1724111b4d0524fdfbb6d",
+        "references/comparison.md": "sha256:b5c5ebe652b7d0dd5ba70ab262ddb7765cbd3581fcccc49a6f5f9d75b0f722f8",
+        "references/troubleshooting.md": "sha256:e090c35590768db397352619e341a31cd267cf86cc91bda03c0a7ccb7df51b5d"
       }
     },
-    "expo-cicd-workflows": {
+    "expo/expo-cicd-workflows": {
       "source": "github.com/expo/skills/plugins/expo/skills/expo-cicd-workflows",
       "type": "github-subdir",
-      "installed_at": "2026-06-02T18:30:22.536968+08:00",
+      "group": "expo",
+      "installed_at": "2026-06-07T14:34:18.0995888+08:00",
       "repo_url": "https://github.com/expo/skills.git",
       "subdir": "plugins/expo/skills/expo-cicd-workflows",
-      "version": "fdd3df1",
+      "version": "145a923",
       "tree_hash": "3e9753a3ba093b8be385deb28db384d183f1e8b9",
       "file_hashes": {
-        "SKILL.md": "sha256:484e1867238a1760d775dd9492ad720ef5099367fbef6907974c69a6a8adc723",
-        "scripts/fetch.js": "sha256:6e00c6fa7277c429c18ae211d1b6515caf2fdf500136cf297921c05d27447483",
-        "scripts/package.json": "sha256:c405e32c72836c09697b19e326ac56786b6d06d830fce577d0785c9382a69daf",
-        "scripts/validate.js": "sha256:6cae9885ca926a450dc8ad08775d80334f551ed5192c7d1acadf89d34201bd4c"
+        "SKILL.md": "sha256:210d1c8cbadc9bc58ea3920d1ca80068f5f307e8bfc0519316259ee4895e063c",
+        "scripts/fetch.js": "sha256:b2414cb0973707beef936d812b80390836eae616395162fcbafbb5d259583dd1",
+        "scripts/package.json": "sha256:3833ee45c56ff8cb997e798ef288095ce435be37f6a7510a56bd684639b6f7ff",
+        "scripts/validate.js": "sha256:67be22960496486929a83d7cb5763509bed881380b71c5a081c012be8a12b940"
       }
     },
-    "expo-deployment": {
+    "expo/expo-deployment": {
       "source": "github.com/expo/skills/plugins/expo/skills/expo-deployment",
       "type": "github-subdir",
-      "installed_at": "2026-06-02T18:30:22.586246+08:00",
+      "group": "expo",
+      "installed_at": "2026-06-07T14:34:18.2012511+08:00",
       "repo_url": "https://github.com/expo/skills.git",
       "subdir": "plugins/expo/skills/expo-deployment",
-      "version": "fdd3df1",
+      "version": "145a923",
       "tree_hash": "1b85cb69d451371559ff6af4f08283a0a6679d1c",
       "file_hashes": {
-        "SKILL.md": "sha256:81b700b0cfe12ac175d4f64d052464db5f7ddc40e8a29cba52c642d87acee0dd",
-        "references/app-store-metadata.md": "sha256:47fbf9077985548a1f58daf584f5fadea24f8b7edc9107230b5d93765708d81f",
-        "references/ios-app-store.md": "sha256:714ecc7855d899892dda359be4a2f8f55f636a4c12c95d96b623046fb4ca0b9b",
-        "references/play-store.md": "sha256:54b7bf0729e8706bcb24c66c16b2c4fea81a4689709a37b6ed5776bc2974f074",
-        "references/testflight.md": "sha256:2f6d2451c676f1360f46defcad6feebb1ad341926a49ed015c5d2aa100c9525d",
-        "references/workflows.md": "sha256:01b66f8fd1754cf2d51c90a4f65505aae32deeea0c6bed169cf8db151f8f415e"
+        "SKILL.md": "sha256:5da4127bd229d1742d498e22a3532a0003f306deca0005e77cb1d58e85a73853",
+        "references/app-store-metadata.md": "sha256:b942c3f7d703962f220e7dbe613005d77076939d2d937b3536105023ae8c52c1",
+        "references/ios-app-store.md": "sha256:6a53116d4ec2c2ba568cbdc88f501f3e6882e99ef2c5e8485a71ecae71fd080f",
+        "references/play-store.md": "sha256:ea94c161e049bd48f37340918d281f977573632bee619f93160f7cee0ddddd54",
+        "references/testflight.md": "sha256:da0c67288f92c18e2464cc40cd5a654004a18c072f26b1dd28a07d64677e4add",
+        "references/workflows.md": "sha256:e15b61f0f3fecc2cc0c34b78e4f3883f7d68e30dc3397e35f65dec5f6c0271d4"
       }
     },
-    "expo-dev-client": {
+    "expo/expo-dev-client": {
       "source": "github.com/expo/skills/plugins/expo/skills/expo-dev-client",
       "type": "github-subdir",
-      "installed_at": "2026-06-02T18:30:22.609104+08:00",
+      "group": "expo",
+      "installed_at": "2026-06-07T14:34:18.2537083+08:00",
       "repo_url": "https://github.com/expo/skills.git",
       "subdir": "plugins/expo/skills/expo-dev-client",
-      "version": "fdd3df1",
+      "version": "145a923",
       "tree_hash": "5adb1357248d76daeb2a80ee65824819b0b21a49",
       "file_hashes": {
-        "SKILL.md": "sha256:aa79e42e9cd96ea92d4e691fb8222145055dec1b868b7defce224a41d8878a5f"
+        "SKILL.md": "sha256:92d37fc4a16f29d9dab38cb58bab0d344d7c288f589aec61f8e4860e30ad7ab2"
       }
     },
-    "expo-module": {
+    "expo/expo-module": {
       "source": "github.com/expo/skills/plugins/expo/skills/expo-module",
       "type": "github-subdir",
-      "installed_at": "2026-06-02T18:30:22.661452+08:00",
+      "group": "expo",
+      "installed_at": "2026-06-07T14:34:18.3765668+08:00",
       "repo_url": "https://github.com/expo/skills.git",
       "subdir": "plugins/expo/skills/expo-module",
-      "version": "fdd3df1",
+      "version": "145a923",
       "tree_hash": "5c0cdbb0f92e46b13c40e339707a9bf4d3a5b9ae",
       "file_hashes": {
-        "SKILL.md": "sha256:febde8bf8ec31cf0c3e56a14ee53d0fd42e904cea4fe9ddfa63abd1449453774",
-        "references/config-plugin.md": "sha256:f1e0d7e421e41037368afbc3ddd31a466843398600579364239b63c574445246",
-        "references/create-expo-module.md": "sha256:d292f0cd51238c2f6e1b660e16cb6a87c1fac22864759aa5fc44d298084a5bfe",
-        "references/lifecycle.md": "sha256:b54a9c6e3d2e78f5535aba936efa92cb59dc25a525e8b3b4f821d441432166bf",
-        "references/module-config.md": "sha256:de6eba495e200dc38053bfeabd8cddab2cfc3c5e88bda1a0ec6a078ec9925156",
-        "references/native-module.md": "sha256:69c7cb2cc0044f15c11a594f495aef108c227ce24134aef5f57f59712ccdffe1",
-        "references/native-view.md": "sha256:cde788f4dfad2b56be9395d76939527b43e35216fc2ed970adb24b4000a7a9f4"
+        "SKILL.md": "sha256:8279dcea0911276721096080e9184e5a73ffd86752c324b9ef6128e77a252ca2",
+        "references/config-plugin.md": "sha256:9955d360ccd7e8604acbe01cbc1acf5964d4e94ea2f6b2cafb5b2cf09a4eb1c5",
+        "references/create-expo-module.md": "sha256:b759c19c8ae7bcf83b93e8b81b5962628144357689b2042ec08a8d49d8f6e899",
+        "references/lifecycle.md": "sha256:66339c77300c074159d655f43bbb597db714f6695fb89b7c11059a8838c90923",
+        "references/module-config.md": "sha256:e0769b06f6fe30bd845b7a5fdb0479c53f553aec63701c6f806ccd996c0192ee",
+        "references/native-module.md": "sha256:28a8a535839e4bf073794197a066da7b2573eb0621e70bd9985da5596edd1099",
+        "references/native-view.md": "sha256:e080d20b216c3c5db84984635810e9486c34cda57407e3dda65b91bc3cacb146"
       }
     },
-    "expo-observe": {
+    "expo/expo-observe": {
       "source": "github.com/expo/skills/plugins/expo/skills/expo-observe",
       "type": "github-subdir",
-      "installed_at": "2026-06-02T18:30:22.704699+08:00",
+      "group": "expo",
+      "installed_at": "2026-06-07T14:34:18.4825696+08:00",
       "repo_url": "https://github.com/expo/skills.git",
       "subdir": "plugins/expo/skills/expo-observe",
-      "version": "fdd3df1",
+      "version": "145a923",
       "tree_hash": "a095b2cbf98c80f189e0e3bd7d650495404d557e",
       "file_hashes": {
-        "SKILL.md": "sha256:780843b9d2ddfa14844480465abe6a85f3bb9de94dedb7ee841bb5d49a4e9149",
-        "references/metrics.md": "sha256:89c1408d29b3c8525a2a60f33af2980778e736efb72d34e91cb068802a4e8a98",
-        "references/queries.md": "sha256:d6f9813c8a01427dce02afd2532b410dedfc7904796692067e4bddbbe7b08ef5",
-        "references/setup.md": "sha256:b482975a937746fdc81eea37a97c645ec3c8279d0f3fad4ffc0e11c290442199"
+        "SKILL.md": "sha256:e5b70c11fc9532464b935e20374facdc31d9b5c619917b5c5c3de74c98363cdc",
+        "references/metrics.md": "sha256:eebee2f89ae90753e48d7532b954055cc1cf7d75bf192d9b74aed4b4a04715f9",
+        "references/queries.md": "sha256:c7d3d0a4dce6e0abaa185e792c1db7da5158c36eab96980513d4220dabd657e9",
+        "references/setup.md": "sha256:dfcdc85d0a20a7a1dab3c97fa61dd7b501f4dd315fa6a340c04ca14a39331815"
       }
     },
-    "expo-tailwind-setup": {
+    "expo/expo-tailwind-setup": {
       "source": "github.com/expo/skills/plugins/expo/skills/expo-tailwind-setup",
       "type": "github-subdir",
-      "installed_at": "2026-06-02T18:30:22.73596+08:00",
+      "group": "expo",
+      "installed_at": "2026-06-07T14:34:18.5500685+08:00",
       "repo_url": "https://github.com/expo/skills.git",
       "subdir": "plugins/expo/skills/expo-tailwind-setup",
-      "version": "fdd3df1",
+      "version": "145a923",
       "tree_hash": "bf60256bc226ad60a1eb0a6ce5e32b4aa83b5576",
       "file_hashes": {
-        "SKILL.md": "sha256:6abfc223a376571e0ee84014b3b474a3f2828ac2ebcde59c5c2b6b4bc802e233"
+        "SKILL.md": "sha256:d8a29999edc9cf9f61c337d2c532807a75b3961b5cdf5bd38ddfb136c87842ce"
       }
     },
-    "expo-ui-jetpack-compose": {
+    "expo/expo-ui-jetpack-compose": {
       "source": "github.com/expo/skills/plugins/expo/skills/expo-ui-jetpack-compose",
       "type": "github-subdir",
-      "installed_at": "2026-06-02T18:30:22.757311+08:00",
+      "group": "expo",
+      "installed_at": "2026-06-07T14:34:18.5984776+08:00",
       "repo_url": "https://github.com/expo/skills.git",
       "subdir": "plugins/expo/skills/expo-ui-jetpack-compose",
-      "version": "fdd3df1",
+      "version": "145a923",
       "tree_hash": "fa6fcc81ecfb06a7283d29786fb819ec492ba5cf",
       "file_hashes": {
-        "SKILL.md": "sha256:79c542e21876ae7bc01ec1bcd84f0ae4057e5bc0823c417326bcea4451cbc870"
+        "SKILL.md": "sha256:c79de1cd931b53f22ed6c1b4e7059e371d9adfd6410355600bb615f3f0670de5"
       }
     },
-    "expo-ui-swift-ui": {
+    "expo/expo-ui-swift-ui": {
       "source": "github.com/expo/skills/plugins/expo/skills/expo-ui-swift-ui",
       "type": "github-subdir",
-      "installed_at": "2026-06-02T18:30:22.778431+08:00",
+      "group": "expo",
+      "installed_at": "2026-06-07T14:34:18.6490621+08:00",
       "repo_url": "https://github.com/expo/skills.git",
       "subdir": "plugins/expo/skills/expo-ui-swift-ui",
-      "version": "fdd3df1",
+      "version": "145a923",
       "tree_hash": "e1d30363e4f1724c6c6e47f32eb1484b3131e572",
       "file_hashes": {
-        "SKILL.md": "sha256:fa3dd55b08d43d7b423c0e009d185336551f06fe6ede1ed012de1e0554e5f3ab"
+        "SKILL.md": "sha256:ac27c560f869b77dba2f366824d5faab501d1414cd590b08d54d76ffc542ba10"
+      }
+    },
+    "expo/native-data-fetching": {
+      "source": "github.com/expo/skills/plugins/expo/skills/native-data-fetching",
+      "type": "github-subdir",
+      "group": "expo",
+      "installed_at": "2026-06-07T14:34:18.7342315+08:00",
+      "repo_url": "https://github.com/expo/skills.git",
+      "subdir": "plugins/expo/skills/native-data-fetching",
+      "version": "145a923",
+      "tree_hash": "f7dbb2c2ad7ed6247a5bf74c81611feb01f5d13e",
+      "file_hashes": {
+        "SKILL.md": "sha256:cb15d261969ff8b294e2c69c3c99e808f76362a83fc0ac6c389f6f8f6b973a4c",
+        "references/expo-router-loaders.md": "sha256:4fb443d7bf0f9586b277e152c7532b995d10027fef1cae44bf87c085230b0911"
+      }
+    },
+    "expo/upgrading-expo": {
+      "source": "github.com/expo/skills/plugins/expo/skills/upgrading-expo",
+      "type": "github-subdir",
+      "group": "expo",
+      "installed_at": "2026-06-07T14:34:18.8459976+08:00",
+      "repo_url": "https://github.com/expo/skills.git",
+      "subdir": "plugins/expo/skills/upgrading-expo",
+      "version": "145a923",
+      "tree_hash": "092239dd876e79c903023a494cf4fe3985c1f28b",
+      "file_hashes": {
+        "SKILL.md": "sha256:1706e3b87a24fe8a737c934f7a78db280fe7ae6e104a272ef3729a125c95de25",
+        "references/expo-av-to-audio.md": "sha256:b455a85555e9af9def3441177006584c01ad93cced95d70a47a430537336f90c",
+        "references/expo-av-to-video.md": "sha256:2fe6ffc6a7e8ee41643b0db4cf5f547198e5cd99060d1986660ccce052f6755d",
+        "references/native-tabs.md": "sha256:bff2b54150e2047173f0c69da0fe9fd005d253b6c841a5ea9b6b393614346c27",
+        "references/new-architecture.md": "sha256:ebf4242393dd9fd83f77fafeefd0a942cd338ab2f341ec5d3a3dc2689b239dbd",
+        "references/react-19.md": "sha256:17df383ddb3d619022e18cf545bbfc6745f5d3bc1166e3c7c8c2057828694bbd",
+        "references/react-compiler.md": "sha256:146eb76c8f0e1d83f062ba202e2f3859a394a616fad1b20f234ef1c514776953",
+        "references/react-navigation-to-expo-router.md": "sha256:100202d9d487724910895696acf83ba1e5f7f1155583c1dd0c126cf92a409409"
+      }
+    },
+    "expo/use-dom": {
+      "source": "github.com/expo/skills/plugins/expo/skills/use-dom",
+      "type": "github-subdir",
+      "group": "expo",
+      "installed_at": "2026-06-07T14:34:18.9064338+08:00",
+      "repo_url": "https://github.com/expo/skills.git",
+      "subdir": "plugins/expo/skills/use-dom",
+      "version": "145a923",
+      "tree_hash": "ce309744c9ec448b2a4ac7152910da46797e316a",
+      "file_hashes": {
+        "SKILL.md": "sha256:97d80e3ed323c837dfbbff07c4a15def65f0ad07e4700bebe603d6735924b148"
       }
     },
     "mobile-design": {
@@ -220,19 +280,6 @@
         "touch-psychology.md": "sha256:042826ecc3db2fb98a7c279af3aeeadf5e293ff3c6db59bcd0d4bffacef77679"
       }
     },
-    "native-data-fetching": {
-      "source": "github.com/expo/skills/plugins/expo/skills/native-data-fetching",
-      "type": "github-subdir",
-      "installed_at": "2026-06-02T18:30:22.817014+08:00",
-      "repo_url": "https://github.com/expo/skills.git",
-      "subdir": "plugins/expo/skills/native-data-fetching",
-      "version": "fdd3df1",
-      "tree_hash": "f7dbb2c2ad7ed6247a5bf74c81611feb01f5d13e",
-      "file_hashes": {
-        "SKILL.md": "sha256:ab855acdad6f593eb597b2891671808bf57fc4618fb0eaa26a84ea30576a5d5e",
-        "references/expo-router-loaders.md": "sha256:f842c86483a15380c44a4b49db27bf3d41e17b48b1f44b9a2bbacc563a9dcbe6"
-      }
-    },
     "shadcn": {
       "source": "github.com/shadcn/ui/skills/shadcn",
       "type": "github-subdir",
@@ -255,37 +302,6 @@
         "rules/forms.md": "sha256:a5422ccca0bcaa9ccb5e8a3745bacd08eadcf9a96f54e1b39f5ffe725f316feb",
         "rules/icons.md": "sha256:08a07baacbbef0926002b88ca1fc410bf70eb7938a3f3521e4d8f643f6621908",
         "rules/styling.md": "sha256:6e9c6ee8c29cb5930b16d295a45e2109ab8913f2300237448f04fd25deaf15b0"
-      }
-    },
-    "upgrading-expo": {
-      "source": "github.com/expo/skills/plugins/expo/skills/upgrading-expo",
-      "type": "github-subdir",
-      "installed_at": "2026-06-02T18:30:22.860511+08:00",
-      "repo_url": "https://github.com/expo/skills.git",
-      "subdir": "plugins/expo/skills/upgrading-expo",
-      "version": "fdd3df1",
-      "tree_hash": "092239dd876e79c903023a494cf4fe3985c1f28b",
-      "file_hashes": {
-        "SKILL.md": "sha256:54cec12d84cbf11c275e999444ba5a08936346062b12e701f44b78bd4454bb15",
-        "references/expo-av-to-audio.md": "sha256:b66df7e8722339e2b0ae5e22da225e313794744eb0648303ad6cfc43632cc6a1",
-        "references/expo-av-to-video.md": "sha256:e222bf0e767baee721f7e42ce68d2c26a8b844d723e830d81cdfecac805564a2",
-        "references/native-tabs.md": "sha256:bf945b38a970a556769d1c406f8089d8ece34b5f204fe32a0e10fbedc24fff83",
-        "references/new-architecture.md": "sha256:32479e9be069c5e4931dfdf3e475119ddc7a879bac8a475e259e5193bcf32cff",
-        "references/react-19.md": "sha256:bf600571e38dd7d114b58e0f6ace5a560792624dcfdc49c421134cd1669a0d77",
-        "references/react-compiler.md": "sha256:ad485033650cff963abdfd8a98d5bbe5f0825a853ffebd6cfe11a4c80b3c63db",
-        "references/react-navigation-to-expo-router.md": "sha256:083fb891adb87a1ab02aff92b1f322014ecb2427014e20194ff9e05f5d321ca9"
-      }
-    },
-    "use-dom": {
-      "source": "github.com/expo/skills/plugins/expo/skills/use-dom",
-      "type": "github-subdir",
-      "installed_at": "2026-06-02T18:30:22.889504+08:00",
-      "repo_url": "https://github.com/expo/skills.git",
-      "subdir": "plugins/expo/skills/use-dom",
-      "version": "fdd3df1",
-      "tree_hash": "ce309744c9ec448b2a4ac7152910da46797e316a",
-      "file_hashes": {
-        "SKILL.md": "sha256:7041bb26db02e24c45eb6c4c4879138a0f52786dd928eefd66c90a35b0e3197d"
       }
     }
   }
