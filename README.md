@@ -2,6 +2,8 @@
 
 个人技能集合。本仓库技能通过 **[skillshare](https://github.com/runkids/skillshare)**（命令行 `skillshare`）安装、更新并同步到各 AI CLI。下文「skillshare」均指该官方工具；文档站：<https://skillshare.runkids.cc/docs/>。
 
+下列流程与官方文档中的 [Commands](https://skillshare.runkids.cc/docs/reference/commands)、[init](https://skillshare.runkids.cc/docs/reference/commands/init)、[install](https://skillshare.runkids.cc/docs/reference/commands/install) 及 [Cross-Machine Sync](https://skillshare.runkids.cc/docs/how-to/sharing/cross-machine-sync) 等章节一致，便于从「装机」到「日常」一眼看完。
+
 ---
 
 ## 为何用 skillshare
