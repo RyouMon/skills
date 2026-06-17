@@ -414,15 +414,19 @@ output.testUser = users[0]
 
 ```yaml
 # BAD — Two separate files for iOS/Android
-# GOOD — Single flow with platform conditionals
-- tapOn:
-    id: "submit"
+# GOOD — Single flow with platform conditionals via runFlow
+- runFlow:
     when:
-      platform: ios
-- tapOn:
-    id: "submit_android"
+      platform: iOS
+    commands:
+      - tapOn:
+          id: "submit_ios"
+- runFlow:
     when:
-      platform: android
+      platform: Android
+    commands:
+      - tapOn:
+          id: "submit_android"
 ```
 
 ### 6. Missing `optional` on One-Time Elements

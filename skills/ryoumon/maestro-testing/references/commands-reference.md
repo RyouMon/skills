@@ -809,7 +809,7 @@ These parameters can be applied to most commands:
 | `optional` | boolean | Skip command if element not found. Default `false` |
 | `label` | string | Custom description in test reports |
 | `timeout` | integer | Override default timeout (ms) |
-| `when` | map | Conditional execution (see Conditions below) |
+| `optional` | boolean | If `true`, skip command on failure instead of failing the flow. Default `false` |
 
 ---
 
@@ -820,39 +820,52 @@ These parameters can be applied to most commands:
 Execute a command only if a condition is met:
 
 ```yaml
-- tapOn:
-    id: "accept_cookies"
-    when:
-      visible: "Accept Cookies"                     # Only tap if visible
-
-- tapOn:
-    id: "ios_only_button"
-    when:
-      platform: ios                                 # Only on iOS
-
-- tapOn:
-    id: "android_only"
-    when:
-      platform: android
+# Conditions are set on runFlow, NOT on tapOn directly.
+# Wrap conditional tapOn inside runFlow.commands:
 
 - runFlow:
-    file: premium_flow.yaml
     when:
-      true: ${output.isPremium === true}            # JavaScript condition
+      visible: "Accept Cookies"
+    commands:
+      - tapOn:
+          id: "accept_cookies"
 
-- tapOn:
-    id: "banner_close"
+- runFlow:
     when:
-      notVisible: "Main Content"                    # Only if NOT visible (inverted)
+      platform: iOS
+    commands:
+      - tapOn:
+          id: "ios_only_button"
+
+- runFlow:
+    when:
+      platform: Android
+    commands:
+      - tapOn:
+          id: "android_only"
+
+- runFlow:
+    when:
+      true: ${output.isPremium === true}
+    file: premium_flow.yaml
+
+- runFlow:
+    when:
+      notVisible: "Main Content"
+    commands:
+      - tapOn:
+          id: "banner_close"
 ```
 
 | Condition | Description |
 |-----------|-------------|
 | `visible` | Execute if element is visible |
 | `notVisible` | Execute if element is NOT visible |
-| `platform: ios` | Execute only on iOS |
-| `platform: android` | Execute only on Android |
+| `platform: iOS` | Execute only on iOS (case-sensitive) |
+| `platform: Android` | Execute only on Android (case-sensitive) |
 | `true` | Execute if JS expression is truthy |
+
+**Important**: `when` is a parameter of **`runFlow`** (and `repeat`), NOT individual action commands like `tapOn` or `assertVisible`. To conditionally execute a `tapOn`, wrap it in `runFlow: { when: ..., commands: [ - tapOn: ... ] }`.
 
 **Multiple conditions in a single `when` use AND logic.**
 

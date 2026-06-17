@@ -361,16 +361,20 @@ appId: ${APP_ID}
 - launchApp:
     clearState: true
 
-# Platform-conditional steps
-- tapOn:
-    id: "ios_specific_button"
+# Platform-conditional steps — wrap in runFlow
+- runFlow:
     when:
-      platform: ios
+      platform: iOS
+    commands:
+      - tapOn:
+          id: "ios_specific_button"
 
-- tapOn:
-    id: "android_specific_button"
+- runFlow:
     when:
-      platform: android
+      platform: Android
+    commands:
+      - tapOn:
+          id: "android_specific_button"
 
 # Platform-agnostic step
 - tapOn:
@@ -399,14 +403,14 @@ if (maestro.platform === 'ios') {
 ```yaml
 # Parent flow
 - runFlow:
-    file: ios/setup.yaml
     when:
-      platform: ios
+      platform: iOS
+    file: ios/setup.yaml
 
 - runFlow:
-    file: android/setup.yaml
     when:
-      platform: android
+      platform: Android
+    file: android/setup.yaml
 
 # Common steps for both
 - runFlow: common/login.yaml

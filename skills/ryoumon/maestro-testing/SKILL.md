@@ -135,11 +135,13 @@ env:                               # Optional: flow-level constants
 # External JS file
 - runScript: utils/faker.js
 
-# Conditional with JS
-- tapOn:
-    id: "premium_btn"
+# Conditional with JS — wrap in runFlow
+- runFlow:
     when:
       true: ${output.isPremiumUser === true}
+    commands:
+      - tapOn:
+          id: "premium_btn"
 ```
 
 **Available in JS**: `output` (global data store), `maestro.copiedText`, `maestro.platform` (`ios`/`android`/`web`), `http.get/post/put/delete()`, `json()`.
@@ -228,7 +230,7 @@ platform:
 - **Pass data via `env` + `output`** — Explicit data flow between parent and child flows
 - **Use `optional: true` for non-critical elements** — Ads, popups, one-time prompts
 - **Escape regex in text selectors** — Maestro uses regex matching by default
-- **Platform conditionals**: `when: { platform: ios }` for platform-specific steps
+- **Platform conditionals**: Use `runFlow: { when: { platform: iOS }, commands: [...] }`
 - **Test locally with `--continuous`** — Auto-rerun on file save during development
 - **Always use named CLI flags in CI** — `--app-file`, `--flows` instead of positional args
 
@@ -241,7 +243,7 @@ platform:
 | Monolithic 500-line flows | Break into `runFlow` subflows |
 | Duplicate login in every test | Reusable `login_subflow.yaml` via `runFlow` |
 | Copy-paste selectors everywhere | Centralize in `scripts/selectors.js` (POM pattern) |
-| Platform-specific flows for everything | Use `when: { platform: ios/android }` in single flow |
+| Platform-specific flows for everything | Use `runFlow: { when: { platform: iOS/Android }, commands: [...] }` |
 
 ## CLI Quick Reference
 
