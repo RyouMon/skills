@@ -12,7 +12,19 @@ description: >
 
 # BDD Best Practices - SKILL Quick Reference
 
-> Version: 1.0 | Scope: BDD / Gherkin / Cucumber | Language: English
+> Version: 1.1 | Scope: BDD / Gherkin / Cucumber | Language: English
+
+---
+
+## Using Versioned Examples
+
+The reviewed examples below illustrate a pattern for the version and date stated beside them. They are not dependency recommendations or drop-in templates for every project. Older, unlabeled examples in the reference manuals are historical illustrations with unverified compatibility; do not copy them as current setup. Keep the team's chosen writing conventions, including the concise story and scenario rules below.
+
+Before adapting a code, configuration, or CI example, check the project's manifest and lockfile for the actual Cucumber implementation, major version, JavaScript module format, and test runner. Prefer the project's established setup. Do not upgrade dependencies just to match an example.
+
+If web access is available and an example may be stale (its review date is old, the project's version differs, or an API has changed), check the current **official documentation's example for the project's version** and relevant release or migration notes before using it. The [Cucumber-JVM](https://github.com/cucumber/cucumber-jvm/tree/main/cucumber-junit-platform-engine), [Cucumber-JS configuration](https://github.com/cucumber/cucumber-js/blob/main/docs/configuration.md), [Cucumber-JS transpiling](https://github.com/cucumber/cucumber-js/blob/main/docs/transpiling.md), [Cucumber-Ruby](https://github.com/cucumber/cucumber-ruby), and [Gherkin](https://cucumber.io/docs/gherkin/reference/) references are starting points. A `main` branch page can include unreleased changes; use a release-tagged page when verifying a particular version. If browsing is unavailable, use project-local conventions and state that compatibility has not been verified.
+
+When adding or revising an API-dependent example, record its implementation and version, the date its official source was checked, the source URL, and whether it was executed or only reviewed. Never present a dated snapshot as the current latest version.
 
 ---
 
@@ -31,6 +43,7 @@ description: >
 | Team collaboration workflow | `references/guidelines.md` (TM01-TM06) |
 | CI/CD integration configuration | `references/guidelines.md` (TO04-TO07) |
 | UI automation design | `references/architecture.md` (POM/Screenplay) |
+| Adapt version-sensitive code or CI examples | `references/tooling.md`, `references/testing.md`, or `references/ci-cd.md`; check the current official example when the snapshot may be stale |
 
 ---
 
@@ -70,7 +83,7 @@ features/                 # Feature files
     env.rb                # Core environment configuration
     hooks.rb              # Before/After/Around
     pages/                # Page Object
-step_definitions/         # Step definitions (fixed name)
+  step_definitions/        # Step definitions loaded from features/
 lib/                      # API Clients, Models
 ```
 
@@ -146,6 +159,8 @@ The 10 most important rules selected from 47 complete principles:
 
 ### Template 1: Complete Feature + Step Definition (JVM Style)
 
+> Example snapshot: Cucumber-JVM 7.34.8, Gherkin 6+; official [step-definition](https://cucumber.io/docs/cucumber/step-definitions/) and [Gherkin](https://cucumber.io/docs/gherkin/reference/) references checked 2026-09-23. Documentation-reviewed, not executed; application classes are illustrative.
+
 ```gherkin
 # FILE: features/auth/customer-login.feature
 @regression @authentication
@@ -154,25 +169,25 @@ Feature: Customer Login
   I want to log in with my credentials
   So that I can view and manage my orders
 
-  Rule: Valid credentials allow access to the dashboard
+  Rule: Only valid credentials allow access to the dashboard
 
     @positive @smoke
     Scenario: Successful login with valid credentials
-      Given "Jane" has a registered account
-      When "Jane" logs in with her valid credentials
+      Given "Jane" has a registered account with password "correctPass"
+      When the customer logs in with valid credentials
       Then she should be redirected to the order dashboard
       And she should see a welcome message with her name
 
     @negative
     Scenario Outline: Unsuccessful login with invalid credentials
-      Given "<username>" has a registered account
-      When "<username>" attempts to log in with "<password>"
+      Given "<username>" has a registered account with password "correctPass"
+      When the customer attempts to log in with "<password>"
       Then an error message "<error>" should be displayed
 
       Examples:
         | username | password  | error               |
         | Jane     | wrongpass | Invalid credentials |
-        | Unknown  | anypass   | User not found      |
+        | Alex     | badpass   | Invalid credentials |
 ```
 
 ```java
@@ -197,21 +212,21 @@ public class LoginSteps {
         this.dashboardPage = new DashboardPage(ctx.getDriver());
     }
 
-    @Given("{string} has a registered account")
-    public void hasRegisteredAccount(String username) {
-        User user = TestDataGenerator.createUser(username);
+    @Given("{string} has a registered account with password {string}")
+    public void hasRegisteredAccount(String username, String password) {
+        User user = TestDataGenerator.createUser(username, password);
         ctx.setCurrentUser(user);
     }
 
-    @When("{string} logs in with her valid credentials")
-    public void logsIn(String username) {
+    @When("the customer logs in with valid credentials")
+    public void logsIn() {
         User user = ctx.getCurrentUser();
         loginPage.login(user.getEmail(), user.getPassword());
     }
 
-    @When("{string} attempts to log in with {string}")
-    public void attemptLogin(String username, String password) {
-        loginPage.login(username, password);
+    @When("the customer attempts to log in with {string}")
+    public void attemptLogin(String password) {
+        loginPage.login(ctx.getCurrentUser().getEmail(), password);
     }
 
     @Then("she should be redirected to the order dashboard")
@@ -228,6 +243,8 @@ public class LoginSteps {
 
 ### Template 2: Cucumber Expressions + Custom Parameter Types
 
+> Example snapshot: Cucumber-JVM 7.34.8; official [parameter-type](https://cucumber.io/docs/cucumber/cucumber-expressions/) reference checked 2026-09-23. Documentation-reviewed, not executed; application classes are illustrative.
+
 ```gherkin
 # Use natural, fluent expressions in Gherkin
 Feature: Product Purchase
@@ -240,7 +257,7 @@ Feature: Product Purchase
 
 ```java
 // Custom parameter type definitions
-@ParameterType("\\d+\\.\\d{2} (USD|EUR|CNY)")
+@ParameterType("(\\d+\\.\\d{2}) (USD|EUR|CNY)")
 public Money money(String amount, String currency) {
     return new Money(new BigDecimal(amount), Currency.valueOf(currency));
 }
@@ -256,7 +273,7 @@ public void setProductPrice(Money price) {
     this.product = new Product(price);
 }
 
-@When("the customer applies a {int}% discount on {iso-date}")
+@When("the customer applies a {int}% discount on {isoDate}")
 public void applyDiscount(int percentage, LocalDate date) {
     this.product.applyDiscount(percentage, date);
 }
@@ -268,6 +285,8 @@ public void verifyFinalPrice(Money expected) {
 ```
 
 ### Template 3: Scenario Outline + Data Tables (Data-Driven)
+
+> Example snapshot: Cucumber-JVM 7.34.8, Gherkin 6+; official [Gherkin](https://cucumber.io/docs/gherkin/reference/) and [Cucumber Expressions](https://cucumber.io/docs/cucumber/cucumber-expressions/) references checked 2026-09-23. Documentation-reviewed, not executed; application classes are illustrative.
 
 ```gherkin
 # Scenario Outline: same logic x multiple data sets, each row executes one full scenario
@@ -345,6 +364,11 @@ public void registerUsers(DataTable dataTable) {
 | `references/guidelines.md` | 47 coding principles full version, covering six dimensions: Gherkin syntax, scenario writing, Step Definitions, data-driven testing, team collaboration, and test organization |
 | `references/architecture.md` | BDD project architecture design specifications, including JVM/JS/Ruby directory structures, four-layer architecture, dependency rules, naming conventions, and POM/Screenplay patterns |
 | `references/anti-patterns.md` | 12 common anti-patterns catalog, each including symptom identification, impact analysis, remediation plan, and code examples |
+| `references/patterns.md` | Pattern examples for Page Objects, Screenplay, scenario context, test data, and step organization |
+| `references/testing.md` | Test design, hooks, tags, parallel execution, reporting, and flaky-test handling examples |
+| `references/ci-cd.md` | CI examples; check current action, runtime, and runner documentation before use |
+| `references/tooling.md` | Tool selection and versioned framework examples; release tables are dated snapshots |
+| `references/sources.md` | Historical source index; verify dynamic information at its primary source |
 
 ---
 

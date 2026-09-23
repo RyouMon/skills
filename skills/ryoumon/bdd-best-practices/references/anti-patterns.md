@@ -5,6 +5,8 @@
 >
 > Compiled based on Cucumber official documentation, community best practices, and industry research reports.
 
+> **Example status:** Code snippets here are historical illustrations. Their framework versions and execution dates were not recorded. Before adapting version-sensitive code, follow the verification guidance in `../SKILL.md` and the project's installed versions.
+
 ---
 
 ## Table of Contents

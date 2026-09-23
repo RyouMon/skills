@@ -4,6 +4,8 @@
 >
 > Scope: JVM (Java/Kotlin) / JavaScript (Node.js/TypeScript) / Ruby technology stacks
 
+> **Example status:** Most snippets are historical illustrations with no recorded execution date. Dependency versions appearing in them are snapshots, not recommendations. The explicitly reviewed Cucumber-JS configuration below was checked 2026-09-23; verify any other version-sensitive code against official documentation as directed in `../SKILL.md`.
+
 ---
 
 ## Table of Contents
@@ -253,7 +255,7 @@ project-root/
 │   ├── auth/
 │   │   ├── login.feature
 │   │   └── registration.feature
-│   └── support/                                     # Support files
+│   ├── support/                                     # Support files
 │       ├── hooks.js                                 # Before/After Hooks
 │       ├── world.js                                 # World extensions
 │       └── parameter-types.js                       # Custom parameter types
@@ -305,10 +307,10 @@ project-root/
 │           ├── home_page.rb                         # Home page
 │           └── cart_page.rb                         # Cart page
 │
-├── step_definitions/                                # Step definitions (must be at same level or subdirectory as features)
-│   ├── auth_steps.rb                                # Authentication-related steps
-│   ├── cart_steps.rb                                # Cart steps
-│   └── common_steps.rb                              # Common steps
+│   └── step_definitions/                            # Step definitions under features/
+│       ├── auth_steps.rb                            # Authentication-related steps
+│       ├── cart_steps.rb                            # Cart steps
+│       └── common_steps.rb                          # Common steps
 │
 ├── lib/                                             # Custom library code
 │   ├── api_clients/                                 # API clients
@@ -381,7 +383,7 @@ Dir.glob('lib/**/*.rb').each { |f| require f.sub(%r{^lib/}, '').sub(/\.rb$/, '')
 |------|-----------|----------------------|------|
 | **Configuration** | `pom.xml` / `build.gradle` | `package.json` | `Gemfile` / `cucumber.yml` |
 | **Feature files** | `src/test/resources/features/` | `features/` | `features/` |
-| **Step Definitions** | `src/test/java/stepdefinitions/` | `src/step-definitions/` | `step_definitions/` (fixed name) |
+| **Step Definitions** | `src/test/java/stepdefinitions/` | `src/step-definitions/` | `features/step_definitions/` (default layout) |
 | **Page objects** | `src/test/java/pages/` | `src/pages/` | `features/support/pages/` |
 | **Hooks** | Annotations `@Before`/`@After` | `src/step-definitions/hooks/` | `features/support/hooks.rb` |
 | **World/Context** | DI container (PicoContainer) | `world/` custom World | `features/support/world.rb` |
@@ -1145,7 +1147,7 @@ JavaScript/TypeScript:
 
 Ruby:
   File: features/auth/login.feature
-  Step file: step_definitions/auth_steps.rb
+  Step file: features/step_definitions/auth_steps.rb
   Page object: features/support/pages/login_page.rb
   Methods: enter_username, click_login_button
 ```
@@ -2815,7 +2817,7 @@ end
 
 ```ruby
 # ==================== auth_steps.rb - Using Screenplay in Step Definitions ====================
-# step_definitions/auth_steps.rb
+# features/step_definitions/auth_steps.rb
 
 Given('{string} is on the login page') do |actor_name|
     @actor = Screenplay::Actor.named(actor_name)
@@ -3775,11 +3777,13 @@ Given('a registered customer {string} via API', async function(this: CustomWorld
 
 #### Cucumber Configuration File
 
+> Example snapshot: Cucumber-JS 13.2.1 with CommonJS TypeScript support code, checked 2026-09-23 against the tagged [configuration](https://github.com/cucumber/cucumber-js/blob/v13.2.1/docs/configuration.md) and [transpiling](https://github.com/cucumber/cucumber-js/blob/v13.2.1/docs/transpiling.md) guides. Documentation-reviewed, not executed. An ESM project needs the official ESM `import` / `tsx` registration pattern instead.
+
 ```typescript
 // ==================== cucumber.config.ts - Cucumber TypeScript Configuration ====================
-import { Configuration } from '@cucumber/cucumber';
+import type { IConfiguration } from '@cucumber/cucumber';
 
-const config: Configuration = {
+const config = {
     // Feature file paths
     paths: ['features/**/*.feature'],
 
@@ -3791,21 +3795,15 @@ const config: Configuration = {
     ],
 
     // Compile TypeScript
-    requireModule: ['ts-node/register'],
+    requireModule: ['tsx/cjs'],
 
     // Output format
     format: [
         'progress-bar',
-        '@cucumber/pretty-formatter',
         'html:reports/cucumber-report.html',
         'json:reports/cucumber-report.json',
         'junit:reports/cucumber-report.xml'
     ],
-
-    formatOptions: {
-        colorsEnabled: true,
-        snippetInterface: 'async-await'
-    },
 
     // Parallel execution
     parallel: process.env.CI === 'true' ? 4 : 1,
@@ -3813,16 +3811,13 @@ const config: Configuration = {
     // Retry on failure (use with caution)
     retry: process.env.RETRY ? parseInt(process.env.RETRY, 10) : 0,
 
-    // Publish settings
-    publishQuiet: true,
-
     // Custom World constructor (already registered in custom-world.ts)
     // worldParameters can be used to pass parameters
     worldParameters: {
         baseUrl: process.env.BASE_URL || 'http://localhost:3000',
         headless: process.env.CI === 'true'
     }
-};
+} satisfies Partial<IConfiguration>;
 
 export default config;
 ```
@@ -4124,7 +4119,7 @@ end
 
 ```ruby
 # ==================== auth_steps.rb - Step Definitions Using World ====================
-# step_definitions/auth_steps.rb
+# features/step_definitions/auth_steps.rb
 
 Given('{string} has a registered account') do |username|
     # Use methods mixed into World

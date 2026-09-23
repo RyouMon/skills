@@ -1,7 +1,9 @@
 # BDD Tools and Framework Reference Manual
 
-> Version: 1.0 | Based on 2025 BDD Ecosystem Research
+> Version: 1.1 | Historical research plus example snapshots checked 2026-09-23
 > Applicable Scope: Java / JavaScript / TypeScript / Ruby / .NET / Python
+
+> **Example status:** The version-labeled examples in section 1 were checked against the linked official sources on 2026-09-23 but were not executed. Other code in this manual is historical and may depend on older tool versions; inspect the project's lockfile and verify version-sensitive APIs against the official documentation as directed in `../SKILL.md`.
 
 ---
 
@@ -20,53 +22,38 @@
 
 ### 1.1 Cucumber Ecosystem Overview
 
-> Source: Cucumber 2025 Year in Review[^122^], QA Skills[^25^]
+> Historical ecosystem comparison; the Cucumber and SpecFlow rows were checked against their official sources on 2026-09-23. Check other projects' official release pages before selecting a tool.
 
-| Framework | Primary Language | Syntax | Latest Version | Maintenance Status |
+| Framework | Primary Language | Syntax | Version/status in this snapshot | Maintenance Status |
 |-----------|-----------------|--------|----------------|-------------------|
 | **Cucumber** | Java, JS, Ruby, Go | Gherkin | See table below | Very Active |
-| **SpecFlow** | C#/.NET | Gherkin | v4.x+ | Active |
-| **Behave** | Python | Gherkin | v1.2.6+ | Maintained |
-| **Gauge** | Java, JS, Python, C#, Ruby, Go | Markdown | v1.x | Active |
-| **Reqnroll** | C#/.NET | Gherkin | v2.x+ | Active (SpecFlow successor) |
+| **SpecFlow** | C#/.NET | Gherkin | Legacy projects only | End of life since 2024-12-31 ([Reqnroll notice](https://reqnroll.net/news/2025/01/specflow-end-of-life-has-been-announced/)) |
+| **Behave** | Python | Gherkin | Check official releases | Not reviewed in this update |
+| **Gauge** | Java, JS, Python, C#, Ruby, Go | Markdown | Check official releases | Not reviewed in this update |
+| **Reqnroll** | C#/.NET | Gherkin | Check official releases | Active (SpecFlow successor) |
 
-### 1.2 Cucumber Latest Versions by Language Implementation
+### 1.2 Cucumber Version Snapshot by Language Implementation (checked 2026-09-23)
 
 #### cucumber-js (JavaScript/TypeScript)
 
-> Source: cucumber-js GitHub Releases[^91^]
+> Source: [cucumber-js releases](https://github.com/cucumber/cucumber-js/releases) and [v13.2.1 documentation](https://github.com/cucumber/cucumber-js/blob/v13.2.1/docs/configuration.md). Version rows are a dated snapshot, not a standing recommendation.
 
-| Version | Release Date | Key Changes |
-|---------|--------------|-------------|
-| **v12.8.3** | 2025-12 | Fixed thrown strings handling |
-| **v12.8.2** | 2025-11 | Dependency updates |
-| **v12.8.0** | 2025-10 | Custom externalising options support |
-| **v12.7.0** | 2025-09 | ESM source references support, parallel mode environment variable passing |
-| **v12.4.0** | 2025-07 | **TypeScript config file support** |
-| **v12.3.0** | 2025-06 | Node.js 25.x support, named BeforeAll/AfterAll hooks |
-| **v12.2.0** | 2025-05 | **Execution sharding support** |
-| **v12.0.0** | 2025 | Major release: dropped Node.js 18.x/23.x support |
+| Version | Relevance at check date |
+|---------|-------------------------|
+| **v13.2.1** | Current release at 2026-09-23; use tagged documentation for this example |
+| **v13.0.0** | Drops Node.js 20.x and 25.x; parallel runtime uses worker threads |
+| **v12.0.0** | Removed `publishQuiet` / `--publish-quiet`; remove them from older configs |
 
-**Key New Features**:
-- TypeScript config file support (`cucumber.config.ts`)
-- Execution Sharding for distributed testing
-- Custom plugin system
-- `@cucumber/node` under development (based on Node.js test runner)
+**Example scope:** Cucumber-JS 13.2.1, ESM project (`"type": "module"`), TypeScript support code. Checked 2026-09-23 against [configuration](https://github.com/cucumber/cucumber-js/blob/v13.2.1/docs/configuration.md), [transpiling](https://github.com/cucumber/cucumber-js/blob/v13.2.1/docs/transpiling.md), and [releases](https://github.com/cucumber/cucumber-js/releases). Documentation-reviewed, not executed. For CommonJS or another release, use that version's official example.
 
 **Installation**:
 
 ```bash
-# npm
-npm install --save-dev @cucumber/cucumber
-
-# pnpm
-pnpm add -D @cucumber/cucumber
-
-# TypeScript additional dependencies
-npm install --save-dev ts-node typescript @types/node
+# Snapshot dependency; tsx and TypeScript versions are resolved by the project lockfile.
+npm install --save-dev @cucumber/cucumber@13.2.1 tsx typescript @types/node
 ```
 
-**Recommended package.json Configuration**:
+**ESM package.json scripts**:
 
 ```json
 {
@@ -75,66 +62,61 @@ npm install --save-dev ts-node typescript @types/node
     "test:cucumber": "cucumber-js --config cucumber.config.ts",
     "test:cucumber:smoke": "cucumber-js --config cucumber.config.ts --tags @smoke",
     "test:cucumber:parallel": "cucumber-js --config cucumber.config.ts --parallel 4"
-  },
-  "devDependencies": {
-    "@cucumber/cucumber": "^12.8.0",
-    "@types/node": "^20.0.0",
-    "ts-node": "^10.9.0",
-    "typescript": "^5.4.0"
   }
 }
 ```
 
-**TypeScript Configuration**:
+**ESM TypeScript configuration** (register `tsx` before loading step definitions):
+
+```javascript
+// tsx-register.js
+import { register } from 'tsx/esm/api';
+register();
+```
 
 ```typescript
 // cucumber.config.ts
-import type { Configuration } from '@cucumber/cucumber';
+import type { IConfiguration } from '@cucumber/cucumber';
 
 export default {
   paths: ['features/**/*.feature'],
-  require: ['step-definitions/**/*.ts'],
-  requireModule: ['ts-node/register'],
+  import: ['./tsx-register.js', 'features/step-definitions/**/*.ts'],
   format: [
     'progress',
     'html:reports/cucumber-report.html',
     'json:reports/cucumber-report.json'
   ],
-  formatOptions: {
-    colorsEnabled: true,
-    snippetInterface: 'async-await'
-  },
-  publishQuiet: true,
   parallel: 2
-} satisfies Configuration;
+} satisfies Partial<IConfiguration>;
 ```
 
 #### cucumber-jvm (Java)
 
-> Source: Maven Central[^26^], cucumber-jvm GitHub[^95^]
+> Source: [Cucumber-JVM installation](https://cucumber.io/docs/installation/java/), [v7.34.8 JUnit engine POM](https://github.com/cucumber/cucumber-jvm/blob/v7.34.8/cucumber-junit-platform-engine/pom.xml), and [JUnit Platform Engine guide](https://github.com/cucumber/cucumber-jvm/blob/v7.34.8/cucumber-junit-platform-engine/README.md), checked 2026-09-23. The Maven/Gradle/suite examples below are documentation-reviewed, not executed.
 
-| Version | Release Date | Usage |
-|---------|--------------|-------|
-| **7.34.3** | 2026-03 | 19 projects |
-| **7.34.2** | 2026-01 | 35 projects |
-| **7.34.1** | 2026-01 | 10 projects |
-| **7.33.0** | 2025-12 | 49 projects |
-| **7.32.0** | 2025-11 | 15 projects |
-| **7.31.0** | 2025-10 | 22 projects |
-
-**2025 Highlights**:
-- 20 releases (primarily bug fixes and dependency updates)
-- Support for locale sensitive parameter transformers
-- **cucumber-junit deprecated**, cucumber-junit-platform-engine recommended
-- Cucumber JUnit Platform Engine supports rerun files
+| Version | Relevance at check date |
+|---------|-------------------------|
+| **7.34.8** | Version shown by the official installation page on 2026-09-23 |
 
 **Maven Dependencies**:
 
 ```xml
 <properties>
-    <cucumber.version>7.34.3</cucumber.version>
-    <junit.version>5.10.0</junit.version>
+    <cucumber.version>7.34.8</cucumber.version>
+    <junit.bom.version>5.14.2</junit.bom.version>
 </properties>
+
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.junit</groupId>
+            <artifactId>junit-bom</artifactId>
+            <version>${junit.bom.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
 
 <dependencies>
     <!-- Core dependency -->
@@ -153,11 +135,10 @@ export default {
         <scope>test</scope>
     </dependency>
 
-    <!-- JUnit 5 -->
+    <!-- JUnit Platform Suite; version comes from the JUnit BOM -->
     <dependency>
         <groupId>org.junit.platform</groupId>
         <artifactId>junit-platform-suite</artifactId>
-        <version>${junit.version}</version>
         <scope>test</scope>
     </dependency>
 
@@ -169,13 +150,6 @@ export default {
         <scope>test</scope>
     </dependency>
 
-    <!-- Optional: Spring integration -->
-    <dependency>
-        <groupId>io.cucumber</groupId>
-        <artifactId>cucumber-spring</artifactId>
-        <version>${cucumber.version}</version>
-        <scope>test</scope>
-    </dependency>
 </dependencies>
 ```
 
@@ -183,14 +157,15 @@ export default {
 
 ```gradle
 ext {
-    cucumberVersion = '7.34.3'
+    cucumberVersion = '7.34.8'
 }
 
 dependencies {
+    testImplementation platform('org.junit:junit-bom:5.14.2')
     testImplementation "io.cucumber:cucumber-java:${cucumberVersion}"
     testImplementation "io.cucumber:cucumber-junit-platform-engine:${cucumberVersion}"
     testImplementation "io.cucumber:cucumber-picocontainer:${cucumberVersion}"
-    testImplementation 'org.junit.platform:junit-platform-suite:1.10.0'
+    testImplementation 'org.junit.platform:junit-platform-suite'
 }
 ```
 
@@ -204,9 +179,8 @@ import org.junit.platform.suite.api.*;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectPackages("com.example.steps")
+@SelectClasspathResource("features")
 @ConfigurationParameter(key = "cucumber.glue", value = "com.example.steps")
-@ConfigurationParameter(key = "cucumber.features", value = "src/test/resources/features")
 @ConfigurationParameter(key = "cucumber.plugin", 
     value = "pretty, html:target/cucumber-reports.html, json:target/cucumber-reports.json")
 public class CucumberTestSuite {
@@ -215,18 +189,14 @@ public class CucumberTestSuite {
 
 #### cucumber-ruby
 
-> Source: cucumber-ruby GitHub[^126^]
+> Source: [Cucumber-Ruby releases](https://github.com/cucumber/cucumber-ruby/releases) and [v11.1.1 gemspec](https://github.com/cucumber/cucumber-ruby/blob/v11.1.1/cucumber.gemspec), checked 2026-09-23. The Gemfile below is documentation-reviewed, not executed.
 
 | Version | Release Date | Key Changes |
 |---------|--------------|-------------|
-| **v10.0.0** | 2025 | Architecture change milestone |
-| v9.x | 2024 | Stable version |
+| **v11.1.1** | 2026 | Current release at check date; requires Ruby >= 3.2 |
+| v10.x | 2025 | Historical major version |
 
-**2025 Highlights**:
-- 5 releases, including v10.0.0
-- Removed Ruby 2.7 and 3.0 support, minimum Ruby 3.1
-- Added Ruby 4.0+ support
-- Improved backtrace filtering
+Check the target project's Ruby version before choosing a Cucumber-Ruby release.
 
 **Gemfile**:
 
@@ -234,10 +204,7 @@ public class CucumberTestSuite {
 source 'https://rubygems.org'
 
 group :test do
-  gem 'cucumber', '~> 10.0'
-  gem 'rspec', '~> 3.12'
-  gem 'selenium-webdriver', '~> 4.15'
-  gem 'capybara', '~> 3.39'
+  gem 'cucumber', '11.1.1'
 end
 ```
 
@@ -249,7 +216,7 @@ end
 |---------|-------------|-------------|---------------|
 | **Primary Language** | Java | JavaScript/TypeScript | Ruby |
 | **Supported Languages** | Java, Kotlin, Scala, Groovy, Clojure | JavaScript, TypeScript | Ruby |
-| **Step Matching** | Cucumber Expressions + Regex | Cucumber Expressions + Regex | Regex (native) |
+| **Step Matching** | Cucumber Expressions + Regex | Cucumber Expressions + Regex | Cucumber Expressions + Regex |
 | **DI Support** | PicoContainer, Spring, Guice, etc. | World object | World context |
 | **Parallel Execution** | Yes (JUnit 5, TestNG) | Yes (--parallel) | Limited |
 | **Report Formats** | JSON, HTML, JUnit, Allure | JSON, HTML | JSON, HTML |
@@ -263,7 +230,7 @@ end
 | Java team, largest ecosystem | **Cucumber-JVM** | Most documentation, rich plugins |
 | JavaScript/TypeScript project | **cucumber-js** | Native support, modern features |
 | Ruby project | **cucumber-ruby** | Earliest implementation, mature and stable |
-| .NET project | **SpecFlow/Reqnroll** | Deep Visual Studio integration |
+| .NET project | **Reqnroll** | Maintained successor to SpecFlow; follow project requirements |
 | Python project | **Behave** | Pythonic API |
 | Multi-language team | **Gauge** | Markdown syntax is more flexible |
 | Need LivingDoc | **Serenity BDD** | Industry-leading documentation generation |
@@ -589,14 +556,14 @@ npm install --save-dev allure-cucumberjs
 
 ```typescript
 // cucumber.config.ts
-import type { Configuration } from '@cucumber/cucumber';
+import type { IConfiguration } from '@cucumber/cucumber';
 
 export default {
   format: ['allure-cucumberjs/reporter'],
   formatOptions: {
     resultsDir: './allure-results'
   }
-} satisfies Configuration;
+} satisfies Partial<IConfiguration>;
 ```
 
 ### 3.3 Serenity BDD

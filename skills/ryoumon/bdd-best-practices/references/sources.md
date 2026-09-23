@@ -1,6 +1,6 @@
 # BDD Best Practices - Reference Sources Index
 
-> Generated: July 2025
+> Historical source index: originally compiled in 2025 and later expanded; entries were not all reverified on 2026-09-23. For current versions and code examples, follow the official links in `../SKILL.md`.
 > Total Sources: 74
 > Grading Criteria: Tier 1(Official Docs) > Tier 2(RFCs/Release Notes/Authoritative Blogs) > Tier 3(Core Maintainer Blogs/Training) > Tier 4(Well-known Tech Communities) > Tier 5(Personal Blogs/Other References)
 

@@ -4,6 +4,8 @@
 > Scope: Gherkin / Cucumber / BDD Projects
 > Based on: Cucumber Official Documentation, Community Best Practices, Architecture Patterns & CI/CD Research
 
+> **Example status:** The writing conventions are this skill's team guidance. Unlabeled API/code snippets are historical illustrations with unverified execution status; follow `../SKILL.md` for version-sensitive examples.
+
 ---
 
 ## Table of Contents
@@ -82,9 +84,11 @@ Feature: Order Management
 
 ### GL03: Feature Description Must Include User Story Three-Part Format
 
-- **Principle Description**: Each `Feature` description must include the `As a... I want... So that...` three-part format, clearly defining the role, behavior, and business value.
-- **Rationale**: The User Story three-part format forces the team to think about features from a business value perspective, ensuring each Feature has a clear business purpose and audience. It is the foundation of BDD collaboration.
+- **Principle Description**: As this skill's team convention, each `Feature` description must include the `As a... I want... So that...` three-part format, clearly defining the role, behavior, and business value.
+- **Rationale**: This convention prompts the team to state the audience and business value of every Feature. It is a local writing rule, not a requirement of BDD or Gherkin.
 - **Code Example**:
+
+> Template context: Dan North's [“What’s in a Story?”](https://dannorth.net/blog/whats-in-a-story/) (2007) illustrates a role / feature / benefit narrative alongside Given / When / Then acceptance scenarios. The article explicitly allows other story formats; it does not prescribe this skill's mandatory Feature description rule.
 
 ```gherkin
 Feature: Shopping Cart Discount
@@ -350,7 +354,7 @@ Scenario: Cart operations
 ### SC02: Keep Scenarios to 3-5 Steps
 
 - **Principle Description**: Each Scenario should have 3-5 steps (excluding Background). Scenarios exceeding 5 steps should be reviewed; those exceeding 8 steps must be split.
-- **Rationale**: Scenarios with too many steps lose their expressive power as specification and documentation, as readers cannot quickly understand the scenario intent. Short scenarios are more readable, easier to maintain, and execute faster. Cucumber officially recommends 3-5 steps.
+- **Rationale**: Scenarios with too many steps lose their expressive power as specification and documentation, as readers cannot quickly understand the scenario intent. The [Gherkin reference](https://cucumber.io/docs/gherkin/reference/) recommends 3-5 steps; the review and split thresholds here are this skill's team conventions.
 - **Code Example**:
 
 ```gherkin
@@ -490,7 +494,7 @@ public void adminLogin() {
 ### SC06: Follow Strict Given-When-Then Order
 
 - **Principle Description**: Scenarios must be written in the order of Given (preconditions) -> When (action) -> Then (result). Repeating When-Then sequences in the same scenario is prohibited, as is placing Then before When.
-- **Rationale**: Given-When-Then is the structured syntax of BDD, corresponding to the Arrange-Act-Assert pattern. Out-of-order or repeated When-Then violates the single responsibility principle and makes scenarios difficult to read and maintain.
+- **Rationale**: The [Cucumber guidance](https://cucumber.io/docs/bdd/who-does-what/) describes Given / When / Then as the typical order, and the [Gherkin reference](https://cucumber.io/docs/gherkin/reference/) explains that steps execute in their written order. Gherkin does not require every scenario to contain all three keywords or enforce this sequence; the strict order and single When / Then sequence here are team writing conventions for focused scenarios.
 - **Code Example**:
 
 ```gherkin
@@ -552,7 +556,7 @@ Scenario: Free subscriber cannot access premium content
 ### SC08: Keep Background Short (No More Than 4 Lines)
 
 - **Principle Description**: Place Given steps shared by all scenarios within a Feature in `Background`. Background content must be short (no more than 4 lines) and contain only core preconditions that readers must know.
-- **Rationale**: A long Background scrolls off-screen, preventing readers from seeing the complete scenario. Cucumber officially recommends Background be no more than 4 lines. If it exceeds this, unimportant details should be elevated into higher-level steps.
+- **Rationale**: A long Background scrolls off-screen, preventing readers from seeing the complete scenario. The [Gherkin reference](https://cucumber.io/docs/gherkin/reference/) says to consider moving irrelevant detail into higher-level steps when it exceeds four lines; this skill's four-line cap is a team convention.
 - **Code Example**:
 
 ```gherkin
@@ -1012,7 +1016,8 @@ public class TestHooks {
 ```gherkin
 # Recommended - Scenario Outline + Examples
 Scenario Outline: Login with various credential combinations
-  Given "<username>" has a registered account
+  Given "john" has a registered account with password "correctPass"
+  And "unknown" has no registered account
   When "<username>" attempts to log in with "<password>"
   Then the response should be "<result>"
 
@@ -1684,12 +1689,14 @@ serenity.report.accessibility=true
 ### TO08: Use Custom Parameter Types for Domain-Specific Concepts
 
 - **Principle Description**: Define custom parameter types for domain-specific concepts (e.g., currency, dates, status enumerations) to make Gherkin steps more natural and step definitions more concise.
-- **Rationale**: Custom parameter types make Gherkin steps read like natural language (e.g., `{money}`, `{iso-date}`), while automatically handling type conversion, reducing parsing code in step definitions.
+- **Rationale**: Custom parameter types make Gherkin steps read like natural language (e.g., `{money}`, `{isoDate}`), while automatically handling type conversion, reducing parsing code in step definitions.
 - **Code Example**:
+
+> Example snapshot: Cucumber-JVM 7.34.8; [Cucumber Expressions](https://cucumber.io/docs/cucumber/cucumber-expressions/) checked 2026-09-23. Documentation-reviewed, not executed; application classes are illustrative. The parameter name defaults to the Java method name.
 
 ```java
 // Define custom parameter types
-@ParameterType("\\d+\\.\\d{2} (USD|EUR|CNY)")
+@ParameterType("(\\d+\\.\\d{2}) (USD|EUR|CNY)")
 public Money money(String amount, String currency) {
     return new Money(new BigDecimal(amount), Currency.valueOf(currency));
 }
@@ -1715,7 +1722,7 @@ public void setProductPrice(Money price) {
     this.product = new Product(price);
 }
 
-@When("the customer applies a {int}% discount on {iso-date}")
+@When("the customer applies a {int}% discount on {isoDate}")
 public void applyDiscount(int percentage, LocalDate date) {
     this.product.applyDiscount(percentage, date);
 }

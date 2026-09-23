@@ -3,6 +3,8 @@
 > Version: 1.0 | Based on Cucumber Official Documentation, Community Best Practices, and Industry Research
 > Applicable Scope: GitHub Actions / Jenkins / GitLab CI / Azure DevOps
 
+> **Example status:** Workflow and tool versions are snapshots. The Cucumber-JS examples explicitly labeled below were checked against Cucumber-JS 13.2.1 documentation on 2026-09-23 but were not executed. Other CI snippets are historical illustrations with unverified compatibility; check the project's versions and current CI provider documentation per `../SKILL.md`.
+
 ---
 
 ## Table of Contents
@@ -302,6 +304,8 @@ jobs:
 
 ### 2.2 JavaScript/TypeScript Configuration
 
+> Example snapshot: Cucumber-JS 13.2.1 with Node.js 22/24; [v13 release notes](https://github.com/cucumber/cucumber-js/releases/tag/v13.0.0) and [configuration](https://github.com/cucumber/cucumber-js/blob/v13.2.1/docs/configuration.md) checked 2026-09-23. Actions versions are illustrative and must be checked against current GitHub documentation. Documentation-reviewed, not executed.
+
 ```yaml
 # .github/workflows/bdd-tests-js.yml
 name: BDD Tests (JavaScript)
@@ -317,7 +321,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20, 22]
+        node-version: [22, 24]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -355,7 +359,7 @@ jobs:
             *.html
             *.json
 
-  # Sharded execution example (cucumber-js v12.2.0+)
+  # Sharded execution example (Cucumber-JS 13.2.1 snapshot)
   bdd-sharded:
     runs-on: ubuntu-latest
     strategy:
@@ -368,7 +372,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
@@ -880,9 +884,11 @@ generate-report:
 
 ### 4.2 GitLab CI for JavaScript Projects
 
+> Historical CI layout: the base Node image was changed to 22 after checking Cucumber-JS 13.2.1 requirements on 2026-09-23. The separate Playwright image and other GitLab settings were not executed or revalidated; check their Node version and current GitLab/Playwright documentation before use.
+
 ```yaml
 # .gitlab-ci.yml (JavaScript/TypeScript)
-image: node:20
+image: node:22
 
 stages:
   - install
@@ -982,7 +988,7 @@ bdd-sharded:
         path: target/cucumber.json
 
 # ==========================================
-# cucumber-js built-in sharding (v12.2.0+)
+# cucumber-js built-in sharding (v12.2.0+; Node 22 for v13.2.1 snapshot)
 # ==========================================
 cucumber-js-shard:
   runs-on: ubuntu-latest
@@ -993,7 +999,7 @@ cucumber-js-shard:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: '22'
 
     - run: npm ci
 
@@ -1143,13 +1149,15 @@ services:
 
 ### 6.2 cucumber-js Retry Configuration
 
+> Example snapshot: Cucumber-JS 13.2.1 with CommonJS TypeScript support code; tagged [configuration](https://github.com/cucumber/cucumber-js/blob/v13.2.1/docs/configuration.md), [transpiling](https://github.com/cucumber/cucumber-js/blob/v13.2.1/docs/transpiling.md), and [rerun](https://github.com/cucumber/cucumber-js/blob/v13.2.1/docs/rerun.md) guides checked 2026-09-23. Documentation-reviewed, not executed. Use the official ESM pattern for ESM projects.
+
 ```typescript
 // cucumber.config.ts
-import type { Configuration } from '@cucumber/cucumber';
+import type { IConfiguration } from '@cucumber/cucumber';
 
 export default {
-    paths: ['features/**/*.feature'],
     require: ['step-definitions/**/*.ts'],
+    requireModule: ['tsx/cjs'],
     format: [
         'progress',
         'html:reports/cucumber-report.html',
@@ -1157,24 +1165,25 @@ export default {
         'rerun:@rerun.txt'  // Generate failed scenario list
     ],
     parallel: 4,
-    publishQuiet: true,
-} satisfies Configuration;
+} satisfies Partial<IConfiguration>;
 ```
 
 ```bash
-# Retry logic in CI pipeline
 #!/bin/bash
+# Retry failed scenarios from the rerun formatter
 set -e
 
 # First run
+set +e
 npx cucumber-js --config cucumber.config.ts --tags "@regression"
 EXIT_CODE=$?
+set -e
 
 # If there are failures, retry failed scenarios
-if [ $EXIT_CODE -ne 0 ] && [ -f @rerun.txt ]; then
-    echo "Retrying failed scenarios..."
-    npx cucumber-js --config cucumber.config.ts @rerun.txt
-fi
+if [ "$EXIT_CODE" -eq 0 ]; then exit 0; fi
+if [ ! -s @rerun.txt ]; then exit "$EXIT_CODE"; fi
+echo "Retrying failed scenarios..."
+npx cucumber-js --config cucumber.config.ts @rerun.txt
 ```
 
 ### 6.3 Jenkins Retry
@@ -1274,45 +1283,35 @@ pipeline {
 
 ### 7.3 Multi-Environment Configuration (cucumber.yml)
 
+> Example snapshot: Cucumber-JS 13.2.1, CommonJS TypeScript support code; tagged [configuration](https://github.com/cucumber/cucumber-js/blob/v13.2.1/docs/configuration.md) and [transpiling](https://github.com/cucumber/cucumber-js/blob/v13.2.1/docs/transpiling.md) guides checked 2026-09-23. Documentation-reviewed, not executed. Profiles are separate examples; adapt paths and formatters to your project.
+
 ```yaml
 # cucumber.yml - Multi-environment configuration
 default:
-  --require-module ts-node/register
-  --require features/support/*.ts
-  --require features/step_definitions/*.ts
-  --format progress
-  --publish-quiet
+  requireModule: ['tsx/cjs']
+  require: ['features/support/*.ts', 'features/step_definitions/*.ts']
+  format: ['progress']
 
 ci:
-  --require-module ts-node/register
-  --require features/support/*.ts
-  --require features/step_definitions/*.ts
-  --format json:reports/cucumber.json
-  --format html:reports/cucumber-report.html
-  --format junit:reports/cucumber.xml
-  --publish-quiet
+  requireModule: ['tsx/cjs']
+  require: ['features/support/*.ts', 'features/step_definitions/*.ts']
+  format: ['json:reports/cucumber.json', 'html:reports/cucumber-report.html', 'junit:reports/cucumber.xml']
 
 html_report:
-  --require-module ts-node/register
-  --require features/support/*.ts
-  --require features/step_definitions/*.ts
-  --format html:reports/cucumber-report.html
-  --publish-quiet
+  requireModule: ['tsx/cjs']
+  require: ['features/support/*.ts', 'features/step_definitions/*.ts']
+  format: ['html:reports/cucumber-report.html']
 
 rerun:
-  --require-module ts-node/register
-  --require features/support/*.ts
-  --require features/step_definitions/*.ts
-  --format rerun:@rerun.txt
-  --publish-quiet
+  requireModule: ['tsx/cjs']
+  require: ['features/support/*.ts', 'features/step_definitions/*.ts']
+  format: ['rerun:@rerun.txt']
 
 debug:
-  --require-module ts-node/register
-  --require features/support/*.ts
-  --require features/step_definitions/*.ts
-  --tags "@debug"
-  --format pretty
-  --publish-quiet
+  requireModule: ['tsx/cjs']
+  require: ['features/support/*.ts', 'features/step_definitions/*.ts']
+  tags: '@debug'
+  format: ['pretty']
 ```
 
 ```bash

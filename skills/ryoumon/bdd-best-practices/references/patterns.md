@@ -4,6 +4,8 @@
 > Version: 2025
 > Language: English
 
+> **Example status:** This is a historical template catalog. Unless a snippet explicitly records its dependency version and review date, its compatibility and execution status are unverified. Follow `../SKILL.md` before using version-sensitive examples in a project.
+
 ---
 
 ## Table of Contents

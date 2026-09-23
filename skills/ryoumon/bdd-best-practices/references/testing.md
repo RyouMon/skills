@@ -1,7 +1,9 @@
 # BDD Testing Strategy and Organization Reference Manual
 
 > Version: 1.0 | Based on Cucumber official documentation, community best practices, and industry research
-> Applicability: Cucumber-JVM 7.34.x / cucumber-js 12.x / cucumber-ruby 10.x
+> Historical applicability: Cucumber-JVM 7.34.x / cucumber-js 12.x / cucumber-ruby 10.x. Reviewed exceptions carry their own version notes.
+
+> **Example status:** Unlabeled snippets are historical illustrations with unverified compatibility and execution status. Check the project's versions and current official examples per `../SKILL.md` before adapting them.
 
 ---
 
@@ -428,7 +430,8 @@ Feature: Customer Login
 
   @negative @boundary
   Scenario Outline: Unsuccessful login with invalid credentials
-    Given "<username>" has a registered account
+    Given "John" has a registered account with password "ValidPass123"
+    And "Unknown" has no registered account
     When "<username>" attempts to log in with "<password>"
     Then he should see an error message "<error_message>"
 
@@ -705,8 +708,10 @@ Scenario: Create a blog post with markdown content
 
 > Source: cucumber-js Official Documentation[^166^]
 
+> CLI example snapshot: Cucumber-JS 13.2.1; checked 2026-09-23 against the tagged [configuration](https://github.com/cucumber/cucumber-js/blob/v13.2.1/docs/configuration.md) guide. Documentation-reviewed, not executed.
+
 ```bash
-# Built-in parallel support (cucumber-js v12.x)
+# Built-in parallel support (Cucumber-JS 13.2.1 snapshot)
 npx cucumber-js --parallel 4
 
 # With Tag filtering
@@ -715,22 +720,23 @@ npx cucumber-js --parallel 4 --tags "@regression and not @wip"
 
 **TypeScript Configuration**:
 
+> Example snapshot: Cucumber-JS 13.2.1, CommonJS support code; checked 2026-09-23 against the tagged [configuration](https://github.com/cucumber/cucumber-js/blob/v13.2.1/docs/configuration.md) and [transpiling](https://github.com/cucumber/cucumber-js/blob/v13.2.1/docs/transpiling.md) guides. Documentation-reviewed, not executed. For ESM, use `import` and the official ESM `tsx` registration pattern.
+
 ```typescript
 // cucumber.config.ts
-import type { Configuration } from '@cucumber/cucumber';
+import type { IConfiguration } from '@cucumber/cucumber';
 
 export default {
     paths: ['features/**/*.feature'],
     require: ['step-definitions/**/*.ts'],
-    requireModule: ['ts-node/register'],
+    requireModule: ['tsx/cjs'],
     format: [
         'progress',
         'html:reports/cucumber-report.html',
         'json:reports/cucumber-report.json'
     ],
-    parallel: 4,  // Number of parallel worker processes
-    publishQuiet: true,
-} satisfies Configuration;
+    parallel: 4,  // Number of parallel workers
+} satisfies Partial<IConfiguration>;
 ```
 
 ### 7.2 JUnit 5 + Maven Surefire Parallel
